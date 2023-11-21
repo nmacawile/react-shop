@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: cv-app
+    image: cv-react
+    ports:
+      - 5173:5173
+    volumes:
+      - cv-app:/app
+      - ~/.ssh:/root/.ssh
+volumes:
+  cv-app:
