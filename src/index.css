@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 *, ::after, ::before {
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 html, body {
@@ -11,11 +11,3 @@ html, body {
   margin: 0;
 }
 
-body {
-  
-  background:
-      linear-gradient(rgb(122, 58, 5), transparent),
-      linear-gradient(to top left, rgb(34, 17, 73), transparent),
-      linear-gradient(to top right, rgb(31, 3, 3), transparent);
-  background-blend-mode: screen;
-}
