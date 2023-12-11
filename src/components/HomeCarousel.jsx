@@ -36,7 +36,7 @@ const slides = [
 
 export function HomeCarousel() {
   return (
-    <div className="h-[28rem] sm:h-64 xl:h-80 2xl:h-96 drop-shadow-md">
+    <div data-testid="home-carousel-component" className="h-[28rem] sm:h-64 xl:h-80 2xl:h-96 drop-shadow-md">
       <Carousel slideInterval="5000">
         {slides.map((slide, i) => {
           const { heading, text, image } = slide;

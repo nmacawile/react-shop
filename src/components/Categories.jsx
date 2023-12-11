@@ -19,7 +19,7 @@ export function Categories() {
   };
 
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 my-4">
+    <section data-testid="categories-component" className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 my-4">
       {categories.map(({ name, image }, index) => (
         <article key={`category-${index}`} className="relative group overflow-hidden">
           <a

@@ -2,19 +2,12 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import App from "./App.jsx";
 
-describe("something truthy and falsy", () => {
-  it("true to be true", () => {
-    expect(true).toBe(true);
-  });
-
-  it("false to be false", () => {
-    expect(false).toBe(false);
-  });
-});
-
-describe("App", () => {
-  it("renders headline", () => {
+describe("App component test", () => {
+  it("renders the components", () => {
     render(<App />);
-    screen.debug();
+
+    expect(screen.getByTestId("header-component")).toBeInTheDocument();
+    expect(screen.getByTestId("home-carousel-component")).toBeInTheDocument();
+    expect(screen.getByTestId("categories-component")).toBeInTheDocument();
   });
 });
