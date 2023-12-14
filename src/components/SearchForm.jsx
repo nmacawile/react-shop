@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchForm = () => {
   return (
-    <form>
+    <form data-testid="search-form">
       <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
         Search
       </label>

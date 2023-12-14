@@ -1,6 +1,5 @@
 import logo from "../assets/svg/logo.svg";
 import SearchForm from "./SearchForm";
-import { Button } from "flowbite-react";
 
 export function Header() {
   return (
