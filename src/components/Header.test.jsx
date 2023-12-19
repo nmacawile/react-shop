@@ -1,10 +1,15 @@
 import { describe, it, expect, beforeEach } from "vitest";
+import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import Header from "./Header.jsx";
 
 describe("Header component test", () => {
   beforeEach(() => {
-    render(<Header />);
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
   });
 
   it("renders the search form", () => {
@@ -12,6 +17,8 @@ describe("Header component test", () => {
   });
 
   it("renders the header title", () => {
-    expect(screen.getByText("Shop")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Shop/ })
+    ).toHaveAttribute("href", "/");
   });
 });

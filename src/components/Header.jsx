@@ -1,16 +1,17 @@
 import logo from "../assets/svg/logo.svg";
 import SearchForm from "./SearchForm";
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
     <header data-testid="header-component" className="bg-sky-600 text-white w-full z-20 top-0 start-0">
       <div className="max-w-screen-xl flex flex-nowrap items-center justify-between mx-auto py-4 px-4 sm:px-8">
-        <a href="/" className="hidden sm:flex items-center space-x-2 rtl:space-x-reverse">
+        <Link to="/" className="hidden sm:flex items-center space-x-2 rtl:space-x-reverse">
           <img src={logo} className="h-8" alt="Shop Logo" />
           <h1 className="self-center text-2xl font-['Merriweather Sans'] font-semibold whitespace-nowrap">
             Shop
           </h1>
-        </a>
+        </Link>
         <SearchForm />
         <button
           type="button"

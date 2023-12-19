@@ -11,46 +11,55 @@ const slides = [
     heading: "Fashion Finds",
     text: "Explore style essentials in our Clothes collection. 👗✨ #FashionFinds",
     image: clothesImage,
+    link: "clothes",
   },
   {
     heading: "Tech Revolution",
     text: "Discover the latest Electronics for a connected life. 📱🔌 #TechRevolution",
     image: electronicsImage,
+    link: "electronics",
   },
   {
     heading: "Home Luxuries",
     text: "Transform with our Furniture collection. 🛋️🏡 #HomeLuxuries",
     image: furnitureImage,
+    link: "furniture",
   },
   {
     heading: "Step in Style",
     text: "Find your perfect pair in our Shoes collection. 👠👟 #StepInStyle",
     image: shoesImage,
+    link: "shoes",
   },
   {
     heading: "Hidden Gems",
     text: "Explore unique finds in our Miscellaneous category. 🎁✨ #HiddenGems",
     image: miscImage,
+    link: "misc",
   },
 ];
 
 export function HomeCarousel() {
   return (
-    <div data-testid="home-carousel-component" className="h-[28rem] sm:h-64 xl:h-80 2xl:h-96 drop-shadow-md">
+    <section
+      data-testid="home-carousel-component"
+      className="h-[28rem] sm:h-64 xl:h-80 2xl:h-96 drop-shadow-md"
+    >
       <Carousel slideInterval="5000">
         {slides.map((slide, i) => {
-          const { heading, text, image } = slide;
+          const { heading, text, image, link } = slide;
           return (
             <Slide
               key={`slide-${i}`}
               heading={heading}
               text={text}
               image={image}
+              link={link}
             ></Slide>
           );
         })}
       </Carousel>
-    </div>
+    </section>
   );
 }
 

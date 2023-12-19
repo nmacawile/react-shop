@@ -1,15 +1,13 @@
 import "./App.css";
-import HomeCarousel from "./components/HomeCarousel.jsx";
 import Header from "./components/Header.jsx";
-import Categories from "./components/Categories.jsx";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Header />
       <main className="main-content p-4 sm:p-8">
-        <HomeCarousel />
-        <Categories />
+        <Outlet />
       </main>
     </>
   );

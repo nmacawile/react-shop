@@ -1,13 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 
 describe("App component test", () => {
   it("renders the components", () => {
-    render(<App />);
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
 
     expect(screen.getByTestId("header-component")).toBeInTheDocument();
-    expect(screen.getByTestId("home-carousel-component")).toBeInTheDocument();
-    expect(screen.getByTestId("categories-component")).toBeInTheDocument();
   });
 });
