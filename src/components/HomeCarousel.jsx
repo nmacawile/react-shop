@@ -35,7 +35,7 @@ const slides = [
     heading: "Hidden Gems",
     text: "Explore unique finds in our Miscellaneous category. 🎁✨ #HiddenGems",
     image: miscImage,
-    link: "misc",
+    link: "miscellaneous",
   },
 ];
 

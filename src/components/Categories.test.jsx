@@ -13,18 +13,18 @@ describe("Categories component test", () => {
   });
 
   it("has links to different categories", () => {
-    const categories = {
-      clothes: "Clothes",
-      electronics: "Electronics",
-      shoes: "Shoes",
-      furniture: "Furniture",
-      misc: "Miscellaneous",
-    };
+    const categories = [
+      "clothes",
+      "electronics",
+      "shoes",
+      "furniture",
+      "miscellaneous",
+    ];
 
-    for (const [link, heading] of Object.entries(categories)) {
+    for (const category of categories) {
       expect(
-        screen.getByRole("link", { name: RegExp(heading) })
-      ).toHaveAttribute("href", `/${link}`);
+        screen.getByRole("link", { name: RegExp(category, "i") })
+      ).toHaveAttribute("href", `/categories/${category}`);
     }
   });
 });

@@ -9,7 +9,7 @@ export function Slide({ heading, text, image, link }) {
         </h2>
         <p className="md:text-xl text-left">{text}</p>
         <Link
-          to={link}
+          to={`categories/${link}`}
           data-testid={`${link}-link`}
           className="self-center mx-auto w-full md:w-64 h-16 mt-4 flex items-center justify-center text-xl text-white font-semibold bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 mb-2 mx-0"
         >

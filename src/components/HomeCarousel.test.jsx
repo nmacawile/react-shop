@@ -17,12 +17,12 @@ describe("HomeCarousel component test", () => {
   });
 
   it("has links to different categories", () => {
-    const links = ["clothes", "electronics", "shoes", "furniture", "misc"];
+    const links = ["clothes", "electronics", "shoes", "furniture", "miscellaneous"];
 
     for (const link of links) {
       expect(screen.getByTestId(`${link}-link`)).toHaveAttribute(
         "href",
-        `/${link}`
+        `/categories/${link}`
       );
     }
   });

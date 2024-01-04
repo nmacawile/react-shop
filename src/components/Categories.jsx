@@ -7,30 +7,24 @@ import { Link } from "react-router-dom";
 
 export function Categories() {
   const categories = [
-    { name: "Clothes", image: clothesIcon, link: "/clothes" },
-    { name: "Electronics", image: electronicsIcon, link: "/electronics" },
-    { name: "Furniture", image: furnitureIcon, link: "/furniture" },
-    { name: "Shoes", image: shoesIcon, link: "/shoes" },
-    { name: "Miscellaneous", image: miscellaneousIcon, link: "/misc" },
+    { name: "Clothes", image: clothesIcon },
+    { name: "Electronics", image: electronicsIcon },
+    { name: "Furniture", image: furnitureIcon },
+    { name: "Shoes", image: shoesIcon },
+    { name: "Miscellaneous", image: miscellaneousIcon },
   ];
-  const textStyle = {
-    WebkitTextStrokeWidth: "1px", // For WebKit browsers
-    WebkitTextStrokeColor: "rgb(75 85 99)", // For WebKit browsers
-    textShadow: "1px 1px 0 rgba(75 85 99 .8)", // For other browsers
-  };
-
   return (
     <section
       data-testid="categories-component"
       className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 my-4"
     >
-      {categories.map(({ name, image, link }, index) => (
+      {categories.map(({ name, image }, index) => (
         <article
           key={`category-${index}`}
           className="relative group overflow-hidden"
         >
           <Link
-            to={link}
+            to={`categories/${name.toLowerCase()}`}
             className="h-32 rounded-md drop-shadow-md flex items-center justify-center bg-no-repeat bg-contain bg-center bg-slate-300 p-4 block"
           >
             <img
