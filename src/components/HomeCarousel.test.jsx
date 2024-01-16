@@ -17,12 +17,19 @@ describe("HomeCarousel component test", () => {
   });
 
   it("has links to different categories", () => {
-    const links = ["clothes", "electronics", "shoes", "furniture", "miscellaneous"];
+    const categories = [
+      { slug: "apparel-and-fashion", name: "Apparel and Fashion" },
+      { slug: "electronics", name: "Electronics" },
+      { slug: "home-and-furniture", name: "Home and Furniture" },
+      { slug: "health-and-beauty", name: "Health and Beauty" },
+      { slug: "sports-and-outdoors", name: "Sports and Outdoors" },
+      { slug: "toys-and-games", name: "Toys and Games" },
+    ];
 
-    for (const link of links) {
-      expect(screen.getByTestId(`${link}-link`)).toHaveAttribute(
+    for (const category of categories) {
+      expect(screen.getByTestId(`${category.slug}-link`)).toHaveAttribute(
         "href",
-        `/categories/${link}`
+        `/categories/${category.slug}`
       );
     }
   });

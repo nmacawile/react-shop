@@ -14,17 +14,18 @@ describe("Categories component test", () => {
 
   it("has links to different categories", () => {
     const categories = [
-      "clothes",
-      "electronics",
-      "shoes",
-      "furniture",
-      "miscellaneous",
+      { slug: "apparel-and-fashion", name: "Apparel and Fashion" },
+      { slug: "electronics", name: "Electronics" },
+      { slug: "home-and-furniture", name: "Home and Furniture" },
+      { slug: "health-and-beauty", name: "Health and Beauty" },
+      { slug: "sports-and-outdoors", name: "Sports and Outdoors" },
+      { slug: "toys-and-games", name: "Toys and Games" },
     ];
 
     for (const category of categories) {
       expect(
-        screen.getByRole("link", { name: RegExp(category, "i") })
-      ).toHaveAttribute("href", `/categories/${category}`);
+        screen.getByRole("link", { name: RegExp(category.name, "i") })
+      ).toHaveAttribute("href", `/categories/${category.slug}`);
     }
   });
 });
