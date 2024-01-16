@@ -1,34 +1,24 @@
-import clothesIcon from "../assets/svg/clothes-14-svgrepo-com.svg";
-import shoesIcon from "../assets/svg/shoes-14-svgrepo-com.svg";
-import furnitureIcon from "../assets/svg/furniture-14-svgrepo-com.svg";
-import miscellaneousIcon from "../assets/svg/gift-14-svgrepo-com.svg";
-import electronicsIcon from "../assets/svg/photo-14-svgrepo-com.svg";
 import { Link } from "react-router-dom";
+import { categories } from "../data/categories";
 
 export function Categories() {
-  const categories = [
-    { name: "Clothes", image: clothesIcon },
-    { name: "Electronics", image: electronicsIcon },
-    { name: "Furniture", image: furnitureIcon },
-    { name: "Shoes", image: shoesIcon },
-    { name: "Miscellaneous", image: miscellaneousIcon },
-  ];
+
   return (
     <section
       data-testid="categories-component"
       className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 my-4"
     >
-      {categories.map(({ name, image }, index) => (
+      {categories.map(({ name, icon, slug }, index) => (
         <article
           key={`category-${index}`}
           className="relative group overflow-hidden"
         >
           <Link
-            to={`categories/${name.toLowerCase()}`}
+            to={`categories/${slug}`}
             className="h-32 rounded-md drop-shadow-md flex items-center justify-center bg-no-repeat bg-contain bg-center bg-slate-300 p-4 block"
           >
             <img
-              src={image}
+              src={icon}
               alt={`${name} icon`}
               className="w-full h-full group-hover:scale-125 transition-transform duration-300"
             />
