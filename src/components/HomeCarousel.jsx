@@ -18,7 +18,7 @@ export function HomeCarousel() {
               heading={carouselHeading}
               text={carouselText}
               image={carouselImage}
-              link={`categories/${slug}`}
+              link={`category/${slug}`}
               testid={`${slug}-link`}
             ></Slide>
           );

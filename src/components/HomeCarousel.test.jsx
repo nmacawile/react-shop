@@ -29,7 +29,7 @@ describe("HomeCarousel component test", () => {
     for (const category of categories) {
       expect(screen.getByTestId(`${category.slug}-link`)).toHaveAttribute(
         "href",
-        `/categories/${category.slug}`
+        `/category/${category.slug}`
       );
     }
   });

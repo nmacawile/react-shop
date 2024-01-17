@@ -25,7 +25,7 @@ describe("Categories component test", () => {
     for (const category of categories) {
       expect(
         screen.getByRole("link", { name: RegExp(category.name, "i") })
-      ).toHaveAttribute("href", `/categories/${category.slug}`);
+      ).toHaveAttribute("href", `/category/${category.slug}`);
     }
   });
 });

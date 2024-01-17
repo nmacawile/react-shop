@@ -14,7 +14,7 @@ export function Categories() {
           className="relative group overflow-hidden"
         >
           <Link
-            to={`categories/${slug}`}
+            to={`category/${slug}`}
             className="h-32 rounded-md drop-shadow-md flex items-center justify-center bg-no-repeat bg-contain bg-center bg-slate-300 p-4 block"
           >
             <img

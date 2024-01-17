@@ -18,9 +18,9 @@ describe("Category component test", () => {
       categories.forEach((category) => {
         render(
           <>
-            <MemoryRouter initialEntries={[`/categories/${category.slug}`]}>
+            <MemoryRouter initialEntries={[`/category/${category.slug}`]}>
               <Routes>
-                <Route path="/categories/:category" element={<Category />} />
+                <Route path="/category/:category" element={<Category />} />
               </Routes>
             </MemoryRouter>
           </>
@@ -37,9 +37,9 @@ describe("Category component test", () => {
     it("renders 'Category not available'", () => {
       render(
         <>
-          <MemoryRouter initialEntries={[`/categories/invalid-category`]}>
+          <MemoryRouter initialEntries={[`/category/invalid-category`]}>
             <Routes>
-              <Route path="/categories/:category" element={<Category />} />
+              <Route path="/category/:category" element={<Category />} />
             </Routes>
           </MemoryRouter>
         </>
