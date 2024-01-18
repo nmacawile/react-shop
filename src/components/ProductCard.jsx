@@ -2,9 +2,11 @@ import Quantity from "./Quantity.jsx";
 import ProductRating from "./ProductRating.jsx";
 import CornerBadge from "./CornerBadge.jsx";
 
-export function ProductCard({ productId }) {
+export function ProductCard({ product }) {
+  const { price, id, name, image, rating } = product;
+
   const isProductInCart = () => {
-    return !!(productId % 2);
+    return !!(id % 2);
   };
 
   return (
@@ -18,8 +20,8 @@ export function ProductCard({ productId }) {
 
       <a href="#">
         <img
-          className="p-8 rounded-t-lg"
-          src="https://www.flowbite-react.com/images/products/apple-watch.png"
+          className="p-8 rounded-t-lg w-full p-0"
+          src={image}
           alt="product image"
         />
       </a>
@@ -28,18 +30,20 @@ export function ProductCard({ productId }) {
           aria-label="current price"
           className="text-3xl font-bold text-gray-900"
         >
-          $599
+          ${price.toLocaleString("en-us")}
         </span>
         <a href="#">
-          <h5 className="text-md font-semibold tracking-tight text-gray-900">
-            Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
+          <h5 className="text-lg font-semibold tracking-tight text-gray-900">
+            {name}
           </h5>
         </a>
-        <ProductRating rating={5} />
+        <ProductRating rating={rating} />
         <div className="flex items-center justify-end">
           {isProductInCart() ? (
             <>
-              <span className="mr-5 text-gray-800 font-semibold text-sm">In Cart</span>
+              <span className="mr-5 text-gray-800 font-semibold text-sm">
+                In Cart
+              </span>
               <Quantity />
             </>
           ) : (
