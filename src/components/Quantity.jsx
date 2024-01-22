@@ -1,9 +1,29 @@
 import "./Quantity.css";
+import { useState } from "react";
 
 export function Quantity() {
+  const [quantity, setQuantity] = useState(1);
+
+  const changeQuantity = (e) => {
+    const value = +e.target.value;
+    setQuantity(value);
+  };
+
+  const increase = () => {
+    setQuantity((q) => q + 1);
+  };
+
+  const decrease = () => {
+    setQuantity((q) => q - 1);
+  };
+
   return (
     <div className="w-32 h-full grid grid-cols-3 items-center">
-      <button className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-l-md border border-e-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200">
+      <button
+        data-testid="quantity-decrease-button"
+        onClick={() => decrease()}
+        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-l-md border border-e-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200"
+      >
         {/* Minus Icon SVG */}
         <svg
           className="w-4 h-4 text-gray-500"
@@ -24,14 +44,20 @@ export function Quantity() {
       </button>
       <input
         type="number"
+        data-testid="quantity-field"
         aria-label="item quantity"
         name="quantity-field"
         min="1"
+        onChange={changeQuantity}
         max="999"
-        defaultValue="1"
+        value={quantity}
         className="quantity h-full p-0 font-bold text-center text-lg text-gray-800 border border-gray-300 rounded-none focus:outline-none focus:ring focus:ring-sky-200 flex-1"
       />
-      <button className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-r-md border border-s-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200">
+      <button
+        data-testid="quantity-increase-button"
+        onClick={() => increase()}
+        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-r-md border border-s-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200"
+      >
         {/* Plus Icon SVG */}
         <svg
           className="w-4 h-4 text-gray-500"
