@@ -1,6 +1,6 @@
 export const fakeData = [
   {
-    id: 1,
+    id: '1',
     name: "Smartphone XYZ",
     price: 599.99,
     description: "A powerful and feature-rich smartphone for your daily needs.",
@@ -9,7 +9,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 2,
+    id: '2',
     name: "Laptop ABC",
     price: 1299.99,
     description:
@@ -19,7 +19,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 3,
+    id: '3',
     name: "Fitness Tracker 2000",
     price: 79.99,
     description: "Track your fitness goals with this advanced fitness tracker.",
@@ -28,7 +28,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 4,
+    id: '4',
     name: "Coffee Maker Deluxe",
     price: 49.99,
     description:
@@ -38,7 +38,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 5,
+    id: '5',
     name: "Running Shoes XYZ",
     price: 89.99,
     description:
@@ -48,7 +48,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 6,
+    id: '6',
     name: "Bluetooth Speaker ABC",
     price: 39.99,
     description:
@@ -58,7 +58,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 7,
+    id: '7',
     name: "Gaming Mouse Pro",
     price: 69.99,
     description:
@@ -68,7 +68,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 8,
+    id: '8',
     name: "Kitchen Blender Deluxe",
     price: 129.99,
     description: "Powerful blender for creating smoothies, soups, and more.",
@@ -77,7 +77,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 9,
+    id: '9',
     name: "HD Smart TV",
     price: 799.99,
     description:
@@ -87,7 +87,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 10,
+    id: '10',
     name: "Outdoor Backpack Adventure",
     price: 119.99,
     description: "Durable and spacious backpack for your outdoor adventures.",
@@ -96,7 +96,7 @@ export const fakeData = [
     image: "https://via.placeholder.com/300",
   },
   {
-    id: 11,
+    id: '11',
     name: "Super Bouncy Shoes",
     price: 119.99,
     description: "Jump higher and run faster.",
