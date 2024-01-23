@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import Category from "./Category.jsx";
+import renderWithProviderWrapper from "../helpers/renderWithProviderWrapper.jsx";
 
 describe("Category component test", () => {
   describe("when category is valid", () => {
@@ -17,13 +18,13 @@ describe("Category component test", () => {
 
       categories.forEach((category) => {
         render(
-          <>
+          renderWithProviderWrapper(
             <MemoryRouter initialEntries={[`/category/${category.slug}`]}>
               <Routes>
                 <Route path="/category/:category" element={<Category />} />
               </Routes>
             </MemoryRouter>
-          </>
+          )
         );
 
         expect(
@@ -36,13 +37,13 @@ describe("Category component test", () => {
   describe("when category is invalid", () => {
     it("renders 'Category not available'", () => {
       render(
-        <>
+        renderWithProviderWrapper(
           <MemoryRouter initialEntries={[`/category/invalid-category`]}>
             <Routes>
               <Route path="/category/:category" element={<Category />} />
             </Routes>
           </MemoryRouter>
-        </>
+        )
       );
 
       expect(screen.getByText("Category not available")).toBeInTheDocument();

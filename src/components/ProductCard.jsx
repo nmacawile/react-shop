@@ -1,12 +1,25 @@
 import Quantity from "./Quantity.jsx";
 import ProductRating from "./ProductRating.jsx";
 import CornerBadge from "./CornerBadge.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem, removeItem } from "../features/cart/cartSlice";
 
 export function ProductCard({ product }) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.value);
+
   const { price, id, name, image, rating } = product;
 
   const isProductInCart = () => {
-    return !!(id % 2);
+    return cart.some((item) => item.id == id);
+  };
+
+  const addToCart = () => {
+    dispatch(addItem(id));
+  };
+
+  const removeFromCart = () => {
+    dispatch(removeItem(id));
   };
 
   return (
@@ -38,23 +51,28 @@ export function ProductCard({ product }) {
           </h5>
         </a>
         <ProductRating rating={rating} />
-        <div className="flex items-center justify-end">
-          {isProductInCart() ? (
-            <>
-              <span className="mr-5 text-gray-800 font-semibold text-sm">
-                In Cart
-              </span>
+        {isProductInCart() ? (
+          <>
+            <div className="flex items-center justify-between">
               <Quantity />
-            </>
-          ) : (
-            <a
-              href="#"
+              <button
+                className="text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                onClick={() => removeFromCart()}
+              >
+                Remove
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-end">
+            <button
               className="text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              onClick={() => addToCart()}
             >
               Add to Cart
-            </a>
-          )}
-        </div>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

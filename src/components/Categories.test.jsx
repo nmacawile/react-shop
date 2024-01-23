@@ -2,13 +2,16 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import Categories from "./Categories.jsx";
+import renderWithProviderWrapper from "../helpers/renderWithProviderWrapper.jsx";
 
 describe("Categories component test", () => {
   beforeEach(() => {
     render(
-      <BrowserRouter>
-        <Categories />
-      </BrowserRouter>
+      renderWithProviderWrapper(
+        <BrowserRouter>
+          <Categories />
+        </BrowserRouter>
+      )
     );
   });
 
