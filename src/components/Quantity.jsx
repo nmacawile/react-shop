@@ -1,20 +1,17 @@
 import "./Quantity.css";
-import { useState } from "react";
 
-export function Quantity() {
-  const [quantity, setQuantity] = useState(1);
-
+export function Quantity({ quantity, setQuantity }) {
   const changeQuantity = (e) => {
     const value = +e.target.value;
     setQuantity(value);
   };
 
   const increase = () => {
-    setQuantity((q) => q + 1);
+    setQuantity(quantity + 1);
   };
 
   const decrease = () => {
-    setQuantity((q) => q - 1);
+    setQuantity(quantity - 1);
   };
 
   return (

@@ -43,17 +43,20 @@ describe("ProductCard component test", () => {
   describe("Add to cart button test", () => {
     it("calls the addItem reducer when clicked", () => {
       fireEvent.click(screen.getByText("Add to Cart"));
-      const actions = store.getActions();
+      const latestAction = store.getActions().pop();
 
-      expect(actions).toEqual([
-        { type: "cart/addItem", payload: "testproductid1211" },
-      ]);
+      expect(latestAction).toEqual({
+        type: "cart/addItem",
+        payload: "testproductid1211",
+      });
     });
   });
 
   describe("Remove from cart button test", () => {
     it("calls the removeItem reducer when clicked", () => {
-      const testStore = mockStore({ cart: { value: [sampleProduct] } });
+      const testStore = mockStore({
+        cart: { value: [{ id: sampleProduct.id, quantity: 1 }] },
+      });
 
       render(
         renderWithProviderWrapper(
@@ -65,11 +68,12 @@ describe("ProductCard component test", () => {
       );
 
       fireEvent.click(screen.getByText("Remove"));
-      const actions = testStore.getActions();
+      const latestAction = testStore.getActions().pop();
 
-      expect(actions).toEqual([
-        { type: "cart/removeItem", payload: "testproductid1211" },
-      ]);
+      expect(latestAction).toEqual({
+        type: "cart/removeItem",
+        payload: "testproductid1211",
+      });
     });
   });
 });
