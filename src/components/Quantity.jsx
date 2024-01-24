@@ -1,6 +1,6 @@
 import "./Quantity.css";
 
-export function Quantity({ quantity, setQuantity }) {
+export function Quantity({ quantity, setQuantity, removeFromCart }) {
   const changeQuantity = (e) => {
     const value = +e.target.value;
     setQuantity(value);
@@ -11,6 +11,7 @@ export function Quantity({ quantity, setQuantity }) {
   };
 
   const decrease = () => {
+    if (quantity === 1) removeFromCart();
     setQuantity(quantity - 1);
   };
 

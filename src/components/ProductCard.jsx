@@ -14,8 +14,8 @@ export function ProductCard({ product }) {
   const cart = useSelector((state) => state.cart.value);
 
   const { price, id, name, image, rating } = product;
-  
-  const itemInCart = cart.find(item => item.id === id);
+
+  const itemInCart = cart.find((item) => item.id === id);
 
   const quantity = itemInCart?.quantity || 0;
 
@@ -33,7 +33,7 @@ export function ProductCard({ product }) {
 
   const setQuantity = (quantity) => {
     dispatch(updateQuantity({ id, quantity }));
-  }
+  };
 
   return (
     <div
@@ -67,7 +67,11 @@ export function ProductCard({ product }) {
         {isProductInCart() ? (
           <>
             <div className="flex items-center justify-between">
-              <Quantity quantity={quantity} setQuantity={setQuantity} />
+              <Quantity
+                quantity={quantity}
+                setQuantity={setQuantity}
+                removeFromCart={removeFromCart}
+              />
               <button
                 className="text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={() => removeFromCart()}

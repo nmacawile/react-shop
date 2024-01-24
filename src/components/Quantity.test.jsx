@@ -102,19 +102,18 @@ describe("Quantity component test", () => {
       expect(inputField).toHaveValue(5);
     });
 
-    it("guards against numbers less than 1", () => {
-      fireEvent.change(inputField, { target: { value: "1" } });
-      for (let i = 0; i < 5; i++) {
+    describe("when quantity value is 1", () => {
+      it("removes the item from the cart", () => {
+        fireEvent.change(inputField, { target: { value: "1" } });
+
         act(() => {
           decreaseButton.dispatchEvent(
             new MouseEvent("click", { bubbles: true })
           );
         });
-      }
 
-      expect(inputField).toHaveValue(1);
+        expect(screen.getByText("Add to Cart")).toBeInTheDocument();
+      });
     });
   });
-
-  
 });
