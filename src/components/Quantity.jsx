@@ -46,6 +46,9 @@ export function Quantity({ quantity, setQuantity }) {
         name="quantity-field"
         min="1"
         onChange={changeQuantity}
+        onFocus={(e) => {
+          e.target.select();
+        }}
         max="999"
         value={quantity}
         className="quantity h-full p-0 font-bold text-center text-lg text-gray-800 border border-gray-300 rounded-none focus:outline-none focus:ring focus:ring-sky-200 flex-1"

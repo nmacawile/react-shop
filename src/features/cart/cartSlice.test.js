@@ -50,6 +50,46 @@ describe("cartSlice", () => {
           ],
         });
       });
+
+      it("should guard against values greater than 999", () => {
+        const initialState = {
+          value: [
+            { id: "1", quantity: 1 },
+            { id: "2", quantity: 1 },
+          ],
+        };
+
+        const newState = cartSlice(
+          initialState,
+          updateQuantity({ id: "1", quantity: 9999 })
+        );
+        expect(newState).toEqual({
+          value: [
+            { id: "1", quantity: 1 },
+            { id: "2", quantity: 1 },
+          ],
+        });
+      });
+
+      it("should guard against values less than 1", () => {
+        const initialState = {
+          value: [
+            { id: "1", quantity: 1 },
+            { id: "2", quantity: 1 },
+          ],
+        };
+
+        const newState = cartSlice(
+          initialState,
+          updateQuantity({ id: "1", quantity: -10 })
+        );
+        expect(newState).toEqual({
+          value: [
+            { id: "1", quantity: 1 },
+            { id: "2", quantity: 1 },
+          ],
+        });
+      });
     });
 
     describe("when item doesn't exist", () => {

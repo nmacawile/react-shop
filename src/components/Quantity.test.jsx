@@ -52,6 +52,14 @@ describe("Quantity component test", () => {
 
       expect(inputField).toHaveValue(50);
     });
+
+    it("guards against values less than 1", () => {
+      act(() => {
+        fireEvent.change(inputField, { target: { value: "-50" } });
+      });
+
+      expect(inputField).toHaveValue(10);
+    });
   });
 
   describe("Increase button", () => {
@@ -65,6 +73,19 @@ describe("Quantity component test", () => {
       }
 
       expect(inputField).toHaveValue(15);
+    });
+
+    it("guards against values greater than 999", () => {
+      fireEvent.change(inputField, { target: { value: "999" } });
+      for (let i = 0; i < 5; i++) {
+        act(() => {
+          increaseButton.dispatchEvent(
+            new MouseEvent("click", { bubbles: true })
+          );
+        });
+      }
+
+      expect(inputField).toHaveValue(999);
     });
   });
 
@@ -80,5 +101,20 @@ describe("Quantity component test", () => {
 
       expect(inputField).toHaveValue(5);
     });
+
+    it("guards against numbers less than 1", () => {
+      fireEvent.change(inputField, { target: { value: "1" } });
+      for (let i = 0; i < 5; i++) {
+        act(() => {
+          decreaseButton.dispatchEvent(
+            new MouseEvent("click", { bubbles: true })
+          );
+        });
+      }
+
+      expect(inputField).toHaveValue(1);
+    });
   });
+
+  
 });
