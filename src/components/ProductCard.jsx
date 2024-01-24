@@ -73,7 +73,7 @@ export function ProductCard({ product }) {
                 removeFromCart={removeFromCart}
               />
               <button
-                className="text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="select-none text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={() => removeFromCart()}
               >
                 Remove
@@ -83,7 +83,7 @@ export function ProductCard({ product }) {
         ) : (
           <div className="flex items-center justify-end">
             <button
-              className="text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="select-none text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               onClick={() => addToCart()}
             >
               Add to Cart
