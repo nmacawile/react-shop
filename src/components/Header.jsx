@@ -2,7 +2,7 @@ import logo from "../assets/svg/logo.svg";
 import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
 
-export function Header() {
+export function Header({ setCartIsOpen }) {
   return (
     <header data-testid="header-component" className="bg-sky-600 text-white w-full z-20 top-0 start-0">
       <div className="max-w-screen-xl gap-4 flex flex-nowrap items-center justify-between mx-auto py-4 px-4 sm:px-8">
@@ -15,6 +15,9 @@ export function Header() {
         <SearchForm />
         <button
           type="button"
+          data-testid="cart-button"
+          aria-controls="cart-drawer"
+          onClick={() => setCartIsOpen(true)}
           className="relative text-white hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm p-2.5 text-center inline-flex items-center"
         >
           <svg
