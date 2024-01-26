@@ -1,12 +1,21 @@
 import logo from "../assets/svg/logo.svg";
 import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function Header({ setCartIsOpen }) {
+  const cartItems = useSelector((state) => state.cart.value.length);
+
   return (
-    <header data-testid="header-component" className="bg-sky-600 text-white w-full z-20 top-0 start-0">
+    <header
+      data-testid="header-component"
+      className="bg-sky-600 text-white w-full z-20 top-0 start-0"
+    >
       <div className="max-w-screen-xl gap-4 flex flex-nowrap items-center justify-between mx-auto py-4 px-4 sm:px-8">
-        <Link to="/" className="flex shrink-0 items-center space-x-2 rtl:space-x-reverse">
+        <Link
+          to="/"
+          className="flex shrink-0 items-center space-x-2 rtl:space-x-reverse"
+        >
           <img src={logo} className="h-8" alt="Shop Logo" />
           <h1 className="hidden sm:block self-center text-2xl font-['Merriweather Sans'] font-semibold whitespace-nowrap">
             Shop
@@ -36,7 +45,14 @@ export function Header({ setCartIsOpen }) {
             />
           </svg>
           <span className="sr-only">Shopping Cart Icon</span>
-          <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-sky-600 bg-white rounded-full -top-2 -end-2">20</div>
+          {cartItems !== 0 && (
+            <div
+              id="cart-items-count"
+              className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-sky-600 bg-white rounded-full -top-2 -end-2"
+            >
+              {cartItems}
+            </div>
+          )}
         </button>
       </div>
     </header>
