@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import CartCard from "./CartCard.jsx";
 
 const CartDrawer = ({ isOpen, setIsOpen }) => {
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const cartItems = useSelector((state) => state.cart.value);
 
   useEffect(() => {
     if (isOpen) {
@@ -38,16 +41,16 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
         id="cart-drawer"
         data-testid="cart-drawer"
         className={
-          "fixed top-0 right-0 z-40 h-screen p-4 flex flex-col overflow-hidden transition-transform bg-gray-100 w-full sm:w-80" +
+          "fixed top-0 right-0 z-40 h-screen flex flex-col overflow-hidden transition-transform bg-white w-full sm:w-96" +
           (animating ? " translate-x-0" : " translate-x-full")
         }
         tabIndex="-1"
         aria-labelledby="cart-drawer-label"
       >
-        <header className="select-none">
+        <header className="p-4 select-none border-b border-gray-300">
           <h3
             id="cart-drawer-label"
-            className="inline-flex items-center mb-4 text-lg font-semibold text-gray-600"
+            className="inline-flex items-center text-lg font-semibold text-gray-600"
           >
             <svg
               className="w-5 h-5 me-3"
@@ -85,34 +88,54 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
             <span className="sr-only">Close menu</span>
           </button>
         </header>
-        <section className="flex-1 mb-6 overflow-y-auto">
-          {/* Cart items go here */}
+
+        <section className="px-2 py-4 flex-1 overflow-y-auto">
+          {cartItems.length >= 1 ? (
+            <ul className="flex flex-col gap-4 ">
+              {cartItems.map((item, index) => (
+                <CartCard key={`cart-${index}`} item={item} />
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 text-md p-4">
+              Your cart is currently empty. <br />
+              Start shopping and fill it with amazing finds!
+            </p>
+          )}
         </section>
-        <footer className="grid grid-cols-2 gap-4 select-none">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-sky-200 hover:border-sky-300 rounded-lg focus:outline-none hover:bg-sky-100 hover:text-sky-900 focus:z-10 focus:ring-4 focus:ring-sky-300"
-          >
-            Keep Shopping
-          </button>
-          <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none">
-            Check Out
-            <svg
-              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
+        <footer className="p-4 border-t border-gray-300">
+          <div id="cart-total" className=" text-center mb-4">
+            <span className="font-semibold mr-2 text-md text-gray-700">
+              Total ({cartItems.length} items):
+            </span>
+            <span className="font-bold text-sky-600 text-xl">$99,999.99</span>
+          </div>
+          <div className="grid grid-cols-2 gap-4 select-none">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-sky-200 hover:border-sky-300 rounded-lg focus:outline-none hover:bg-sky-100 hover:text-sky-900 focus:z-10 focus:ring-4 focus:ring-sky-300"
             >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </button>
+              Keep Shopping
+            </button>
+            <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none">
+              Check Out
+              <svg
+                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"
+                />
+              </svg>
+            </button>
+          </div>
         </footer>
       </aside>
     </div>
