@@ -1,8 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { render, screen, act, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { screen, act, fireEvent } from "@testing-library/react";
 import ProductCard from "./ProductCard.jsx";
-import renderWithProviderWrapper from "../helpers/renderWithProviderWrapper.jsx";
+import { renderWithReduxAndBrowserRouter } from "../helpers/testHelpers.jsx";
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "../features/cart/cartSlice";
 
@@ -31,13 +30,9 @@ describe("Quantity component test", () => {
   };
 
   beforeEach(() => {
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <ProductCard product={sampleProduct} />
-        </BrowserRouter>,
-        createStore()
-      )
+    renderWithReduxAndBrowserRouter(
+      <ProductCard product={sampleProduct} />,
+      createStore()
     );
     increaseButton = screen.getByTestId("quantity-increase-button");
     decreaseButton = screen.getByTestId("quantity-decrease-button");

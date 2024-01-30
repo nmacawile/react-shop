@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { BrowserRouter } from "react-router-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import ProductCard from "./ProductCard.jsx";
-import renderWithProviderWrapper, {
+import {
   store,
   mockStore,
-} from "../helpers/renderWithProviderWrapper.jsx";
+  renderWithReduxAndBrowserRouter,
+} from "../helpers/testHelpers.jsx";
 
 describe("ProductCard component test", () => {
   const sampleProduct = {
@@ -18,61 +18,55 @@ describe("ProductCard component test", () => {
     image: "https://via.placeholder.com/300",
   };
 
-  beforeEach(() => {
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <ProductCard product={sampleProduct} />
-        </BrowserRouter>
-      )
-    );
-  });
+  describe("store is empty", () => {
+    beforeEach(() => {
+      renderWithReduxAndBrowserRouter(<ProductCard product={sampleProduct} />);
+    });
 
-  it("renders the title", () => {
-    expect(screen.getByText("Test Product")).toBeInTheDocument();
-  });
+    it("renders the title", () => {
+      expect(screen.getByText("Test Product")).toBeInTheDocument();
+    });
 
-  it("renders the formatted price with a separator and a currency symbol", () => {
-    expect(screen.getByText("$22,129.99")).toBeInTheDocument();
-  });
+    it("renders the formatted price with a separator and a currency symbol", () => {
+      expect(screen.getByText("$22,129.99")).toBeInTheDocument();
+    });
 
-  it("renders the rating", () => {
-    expect(screen.getByText("4.5")).toBeInTheDocument();
-  });
+    it("renders the rating", () => {
+      expect(screen.getByText("4.5")).toBeInTheDocument();
+    });
 
-  describe("Add to cart button test", () => {
-    it("calls the addItem reducer when clicked", () => {
-      fireEvent.click(screen.getByText("Add to Cart"));
-      const latestAction = store.getActions().pop();
+    describe("Add to cart button test", () => {
+      it("calls the addItem reducer when clicked", () => {
+        fireEvent.click(screen.getByText("Add to Cart"));
+        const latestAction = store.getActions().pop();
 
-      expect(latestAction).toEqual({
-        type: "cart/addItem",
-        payload: "testproductid1211",
+        expect(latestAction).toEqual({
+          type: "cart/addItem",
+          payload: "testproductid1211",
+        });
       });
     });
   });
 
-  describe("Remove from cart button test", () => {
-    it("calls the removeItem reducer when clicked", () => {
-      const testStore = mockStore({
-        cart: { value: [{ id: sampleProduct.id, quantity: 1 }] },
-      });
+  describe("store has an item", () => {
+    describe("Remove from cart button test", () => {
+      it("calls the removeItem reducer when clicked", () => {
+        const testStore = mockStore({
+          cart: { value: [{ id: sampleProduct.id, quantity: 1 }] },
+        });
 
-      render(
-        renderWithProviderWrapper(
-          <BrowserRouter>
-            <ProductCard product={sampleProduct} />
-          </BrowserRouter>,
+        renderWithReduxAndBrowserRouter(
+          <ProductCard product={sampleProduct} />,
           testStore
-        )
-      );
+        );
 
-      fireEvent.click(screen.getByText("Remove"));
-      const latestAction = testStore.getActions().pop();
+        fireEvent.click(screen.getByText("Remove"));
+        const latestAction = testStore.getActions().pop();
 
-      expect(latestAction).toEqual({
-        type: "cart/removeItem",
-        payload: "testproductid1211",
+        expect(latestAction).toEqual({
+          type: "cart/removeItem",
+          payload: "testproductid1211",
+        });
       });
     });
   });

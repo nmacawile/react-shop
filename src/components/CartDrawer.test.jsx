@@ -1,8 +1,7 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { BrowserRouter } from "react-router-dom";
-import { render, screen, act } from "@testing-library/react";
+import { screen, act } from "@testing-library/react";
 import CartDrawer from "./CartDrawer.jsx";
-import renderWithProviderWrapper from "../helpers/renderWithProviderWrapper.jsx";
+import { renderWithReduxAndBrowserRouter } from "../helpers/testHelpers.jsx";
 
 describe("CartDrawer component test", () => {
   let setIsOpen;
@@ -10,12 +9,8 @@ describe("CartDrawer component test", () => {
   beforeEach(() => {
     setIsOpen = vi.fn();
 
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <CartDrawer isOpen={false} setIsOpen={setIsOpen} />
-        </BrowserRouter>
-      )
+    renderWithReduxAndBrowserRouter(
+      <CartDrawer isOpen={false} setIsOpen={setIsOpen} />
     );
   });
 

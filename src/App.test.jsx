@@ -1,19 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import App from "./App.jsx";
-import renderWithProviderWrapper from "./helpers/renderWithProviderWrapper.jsx";
+import { renderWithReduxAndBrowserRouter } from "./helpers/testHelpers.jsx";
 
 describe("App component test", () => {
   it("renders the components", () => {
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    );
-
+    renderWithReduxAndBrowserRouter(<App />);
     expect(screen.getByTestId("header-component")).toBeInTheDocument();
   });
 });

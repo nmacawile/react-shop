@@ -1,10 +1,10 @@
-import { vi, describe, it, expect, beforeEach } from "vitest";
-import { render, screen, act, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { describe, it, expect, beforeEach } from "vitest";
+import { screen, act, fireEvent } from "@testing-library/react";
 import CartCard from "./CartCard.jsx";
-import renderWithProviderWrapper, {
+import {
   store,
-} from "../helpers/renderWithProviderWrapper.jsx";
+  renderWithReduxAndBrowserRouter,
+} from "../helpers/testHelpers.jsx";
 
 describe("CartCard component", () => {
   const sampleProduct = {
@@ -17,17 +17,15 @@ describe("CartCard component", () => {
     image: "https://via.placeholder.com/300",
   };
 
-  // const store = mockStore({
-  //   cart: { value: [{ id: sampleProduct.id, quantity: 5 }] },
-  // });
+  const reduxLatestAction = () => {
+    return store.getActions().pop();
+  };
 
   beforeEach(() => {
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <CartCard item={{ id: sampleProduct.id, quantity: 3 }} />
-        </BrowserRouter>
-      )
+    // store state value is empty; the product isn't in the store
+    // but it will not be checked as it is only mocked
+    renderWithReduxAndBrowserRouter(
+      <CartCard item={{ id: sampleProduct.id, quantity: 3 }} />
     );
   });
 
@@ -45,15 +43,14 @@ describe("CartCard component", () => {
     describe("Increase button", () => {
       it("increments the current quantity by 1", () => {
         const increaseButton = screen.getByTestId("cart-item-increase-button");
+
         act(() => {
           increaseButton.dispatchEvent(
             new MouseEvent("click", { bubbles: true })
           );
         });
 
-        const latestAction = store.getActions().pop();
-
-        expect(latestAction).toEqual({
+        expect(reduxLatestAction()).toEqual({
           type: "cart/updateQuantity",
           payload: { id: "1", quantity: 4 },
         });
@@ -69,9 +66,7 @@ describe("CartCard component", () => {
           );
         });
 
-        const latestAction = store.getActions().pop();
-
-        expect(latestAction).toEqual({
+        expect(reduxLatestAction()).toEqual({
           type: "cart/updateQuantity",
           payload: { id: "1", quantity: 2 },
         });
@@ -85,9 +80,7 @@ describe("CartCard component", () => {
           fireEvent.change(inputField, { target: { value: "50" } });
         });
 
-        const latestAction = store.getActions().pop();
-
-        expect(latestAction).toEqual({
+        expect(reduxLatestAction()).toEqual({
           type: "cart/updateQuantity",
           payload: { id: "1", quantity: 50 },
         });
@@ -103,9 +96,7 @@ describe("CartCard component", () => {
           );
         });
 
-        const latestAction = store.getActions().pop();
-
-        expect(latestAction).toEqual({
+        expect(reduxLatestAction()).toEqual({
           type: "cart/removeItem",
           payload: "1",
         });

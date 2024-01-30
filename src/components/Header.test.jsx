@@ -1,10 +1,10 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { BrowserRouter } from "react-router-dom";
-import { render, screen, act } from "@testing-library/react";
+import { screen, act } from "@testing-library/react";
 import Header from "./Header.jsx";
-import renderWithProviderWrapper, {
+import {
   mockStore,
-} from "../helpers/renderWithProviderWrapper.jsx";
+  renderWithReduxAndBrowserRouter,
+} from "../helpers/testHelpers.jsx";
 
 describe("Header component test", () => {
   const setCartIsOpen = vi.fn();
@@ -19,13 +19,9 @@ describe("Header component test", () => {
   });
 
   beforeEach(() => {
-    render(
-      renderWithProviderWrapper(
-        <BrowserRouter>
-          <Header setCartIsOpen={setCartIsOpen} />
-        </BrowserRouter>,
-        testStore
-      )
+    renderWithReduxAndBrowserRouter(
+      <Header setCartIsOpen={setCartIsOpen} />,
+      testStore
     );
   });
 
