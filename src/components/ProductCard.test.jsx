@@ -42,7 +42,7 @@ describe("ProductCard component test", () => {
 
         expect(latestAction).toEqual({
           type: "cart/addItem",
-          payload: "testproductid1211",
+          payload: { ...sampleProduct },
         });
       });
     });
@@ -52,7 +52,7 @@ describe("ProductCard component test", () => {
     describe("Remove from cart button test", () => {
       it("calls the removeItem reducer when clicked", () => {
         const testStore = mockStore({
-          cart: { value: [{ id: sampleProduct.id, quantity: 1 }] },
+          cart: { value: [{ product: sampleProduct, quantity: 1 }] },
         });
 
         renderWithReduxAndBrowserRouter(

@@ -4,7 +4,7 @@ import { removeItem, updateQuantity } from "../features/cart/cartSlice";
 export function Quantity({ productId }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
-  const cartItem = cart.find((item) => item.id === productId);
+  const cartItem = cart.find((item) => item.product.id === productId);
   const quantity = cartItem.quantity;
 
   const removeFromCart = () => {

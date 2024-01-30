@@ -25,7 +25,7 @@ describe("CartCard component", () => {
     // store state value is empty; the product isn't in the store
     // but it will not be checked as it is only mocked
     renderWithReduxAndBrowserRouter(
-      <CartCard item={{ id: sampleProduct.id, quantity: 3 }} />
+      <CartCard item={{ product: sampleProduct, quantity: 3 }} />
     );
   });
 

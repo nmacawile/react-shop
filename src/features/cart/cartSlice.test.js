@@ -1,17 +1,49 @@
 import cartSlice, { addItem, removeItem, updateQuantity } from "./cartSlice";
 
+const sampleProduct1 = {
+  id: "1",
+  name: "Smartphone XYZ",
+  price: 599.99,
+  description: "A powerful and feature-rich smartphone for your daily needs.",
+  rating: 4.5,
+  category: "Electronics",
+  image: "https://via.placeholder.com/300",
+};
+
+const sampleProduct2 = {
+  id: "2",
+  name: "Laptop ABC",
+  price: 1299.99,
+  description:
+    "High-performance laptop with a sleek design for work and entertainment.",
+  rating: 4.7,
+  category: "Electronics",
+  image: "https://via.placeholder.com/300",
+};
+
 describe("cartSlice", () => {
   describe("addItem reducer", () => {
     it("should add an item", () => {
       const initialState = { value: [] };
-      const newState = cartSlice(initialState, addItem("1"));
-      expect(newState).toEqual({ value: [{ id: "1", quantity: 1 }] });
+      const newState = cartSlice(initialState, addItem(sampleProduct1));
+      expect(newState).toEqual({
+        value: [
+          {
+            product: { ...sampleProduct1 },
+            quantity: 1,
+          },
+        ],
+      });
     });
 
     it("should avoid adding duplicate items", () => {
-      const initialState = { value: [{ id: "1", quantity: 1 }] };
-      const newState = cartSlice(initialState, addItem("1"));
-      expect(newState).toEqual({ value: [{ id: "1", quantity: 1 }] });
+      const initialState = {
+        value: [{ product: sampleProduct1, quantity: 1 }],
+      };
+      const newState = cartSlice(initialState, addItem(sampleProduct1));
+      expect(newState).toEqual({
+        value: [{ product: { ...sampleProduct1 }, quantity: 1 }],
+      });
     });
   });
 
@@ -19,13 +51,15 @@ describe("cartSlice", () => {
     it("should remove an item", () => {
       const initialState = {
         value: [
-          { id: "1", quantity: 1 },
-          { id: "2", quantity: 1 },
+          { product: sampleProduct1, quantity: 1 },
+          { product: sampleProduct2, quantity: 1 },
         ],
       };
 
-      const newState = cartSlice(initialState, removeItem("1"));
-      expect(newState).toEqual({ value: [{ id: "2", quantity: 1 }] });
+      const newState = cartSlice(initialState, removeItem(sampleProduct1.id));
+      expect(newState).toEqual({
+        value: [{ product: { ...sampleProduct2 }, quantity: 1 }],
+      });
     });
   });
 
@@ -34,19 +68,19 @@ describe("cartSlice", () => {
       it("should update an item", () => {
         const initialState = {
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         };
 
         const newState = cartSlice(
           initialState,
-          updateQuantity({ id: "1", quantity: 40 })
+          updateQuantity({ id: sampleProduct1.id, quantity: 40 })
         );
         expect(newState).toEqual({
           value: [
-            { id: "1", quantity: 40 },
-            { id: "2", quantity: 1 },
+            { product: { ...sampleProduct1 }, quantity: 40 },
+            { product: { ...sampleProduct2 }, quantity: 1 },
           ],
         });
       });
@@ -54,19 +88,19 @@ describe("cartSlice", () => {
       it("should guard against values greater than 999", () => {
         const initialState = {
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         };
 
         const newState = cartSlice(
           initialState,
-          updateQuantity({ id: "1", quantity: 9999 })
+          updateQuantity({ id: sampleProduct1.id, quantity: 9999 })
         );
         expect(newState).toEqual({
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         });
       });
@@ -74,19 +108,19 @@ describe("cartSlice", () => {
       it("should guard against values less than 1", () => {
         const initialState = {
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         };
 
         const newState = cartSlice(
           initialState,
-          updateQuantity({ id: "1", quantity: -10 })
+          updateQuantity({ id: sampleProduct1.id, quantity: -10 })
         );
         expect(newState).toEqual({
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         });
       });
@@ -96,8 +130,8 @@ describe("cartSlice", () => {
       it("should not update an item", () => {
         const initialState = {
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         };
 
@@ -107,8 +141,8 @@ describe("cartSlice", () => {
         );
         expect(newState).toEqual({
           value: [
-            { id: "1", quantity: 1 },
-            { id: "2", quantity: 1 },
+            { product: sampleProduct1, quantity: 1 },
+            { product: sampleProduct2, quantity: 1 },
           ],
         });
       });

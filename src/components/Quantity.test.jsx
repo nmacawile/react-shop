@@ -28,7 +28,7 @@ describe("Quantity component test", () => {
 
   beforeEach(() => {
     testStore = mockStore({
-      cart: { value: [{ id: sampleProduct.id, quantity: 10 }] },
+      cart: { value: [{ product: sampleProduct, quantity: 10 }] },
     });
     renderWithReduxAndBrowserRouter(
       <Quantity productId={sampleProduct.id} />,

@@ -1,28 +1,26 @@
-import { fakeData } from "../data/fakeData";
 import { useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "../features/cart/cartSlice";
 
 export function CartCard({ item }) {
-  const quantity = item.quantity;
-  const product = fakeData.find((p) => p.id === item.id);
+  const { quantity, product } = item;
 
   const dispatch = useDispatch();
 
   const remove = () => {
-    dispatch(removeItem(item.id));
+    dispatch(removeItem(product.id));
   };
 
   const changeQuantity = (e) => {
     const value = +e.target.value;
-    dispatch(updateQuantity({ id: item.id, quantity: value }));
+    dispatch(updateQuantity({ id: product.id, quantity: value }));
   };
 
   const increase = () => {
-    dispatch(updateQuantity({ id: item.id, quantity: quantity + 1 }));
+    dispatch(updateQuantity({ id: product.id, quantity: quantity + 1 }));
   };
 
   const decrease = () => {
-    dispatch(updateQuantity({ id: item.id, quantity: quantity - 1 }));
+    dispatch(updateQuantity({ id: product.id, quantity: quantity - 1 }));
   };
 
   return (
@@ -67,8 +65,8 @@ export function CartCard({ item }) {
                   </button>
                   <input
                     type="number"
-                    id={`quantity-field-${item.id}`}
-                    name={`quantity-field-${item.id}`}
+                    id={`quantity-field-${product.id}`}
+                    name={`quantity-field-${product.id}`}
                     onChange={changeQuantity}
                     onFocus={(e) => {
                       e.target.select();

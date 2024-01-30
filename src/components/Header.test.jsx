@@ -7,13 +7,33 @@ import {
 } from "../helpers/testHelpers.jsx";
 
 describe("Header component test", () => {
+  const sampleProduct1 = {
+    id: "1",
+    name: "Smartphone XYZ",
+    price: 599.99,
+    description: "A powerful and feature-rich smartphone for your daily needs.",
+    rating: 4.5,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  };
+  const sampleProduct2 = {
+    id: "2",
+    name: "Laptop ABC",
+    price: 1299.99,
+    description:
+      "High-performance laptop with a sleek design for work and entertainment.",
+    rating: 4.7,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  };
+
   const setCartIsOpen = vi.fn();
 
   const testStore = mockStore({
     cart: {
       value: [
-        { id: "prod1", quantity: 1 },
-        { id: "prod2", quantity: 3 },
+        { product: sampleProduct1, quantity: 1 },
+        { product: sampleProduct2, quantity: 3 },
       ],
     },
   });

@@ -10,14 +10,14 @@ export function ProductCard({ product }) {
 
   const { price, id, name, image, rating } = product;
 
-  const itemInCart = cart.find((item) => item.id === id);
+  const itemInCart = cart.find((item) => item.product.id === id);
 
   const isProductInCart = () => {
     return !!itemInCart;
   };
 
   const addToCart = () => {
-    dispatch(addItem(id));
+    dispatch(addItem(product));
   };
 
   const removeFromCart = () => {
