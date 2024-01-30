@@ -1,18 +1,28 @@
-import "./Quantity.css";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, updateQuantity } from "../features/cart/cartSlice";
 
-export function Quantity({ quantity, setQuantity, removeFromCart }) {
+export function Quantity({ productId }) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.value);
+  const cartItem = cart.find((item) => item.id === productId);
+  const quantity = cartItem.quantity;
+
+  const removeFromCart = () => {
+    dispatch(removeItem(productId));
+  };
+
   const changeQuantity = (e) => {
     const value = +e.target.value;
-    setQuantity(value);
+    dispatch(updateQuantity({ id: productId, quantity: value }));
   };
 
   const increase = () => {
-    setQuantity(quantity + 1);
+    dispatch(updateQuantity({ id: productId, quantity: quantity + 1 }));
   };
 
   const decrease = () => {
     if (quantity === 1) removeFromCart();
-    setQuantity(quantity - 1);
+    dispatch(updateQuantity({ id: productId, quantity: quantity - 1 }));
   };
 
   return (

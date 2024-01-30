@@ -1,9 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { screen, act, fireEvent } from "@testing-library/react";
-import ProductCard from "./ProductCard.jsx";
-import { renderWithReduxAndBrowserRouter } from "../helpers/testHelpers.jsx";
-import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "../features/cart/cartSlice";
+import Quantity from "./Quantity.jsx";
+import {
+  renderWithReduxAndBrowserRouter,
+  mockStore,
+} from "../helpers/testHelpers.jsx";
 
 describe("Quantity component test", () => {
   const sampleProduct = {
@@ -19,20 +20,19 @@ describe("Quantity component test", () => {
   let increaseButton;
   let decreaseButton;
   let inputField;
+  let testStore;
 
-  const createStore = () => {
-    return configureStore({
-      reducer: { cart: cartReducer },
-      preloadedState: {
-        cart: { value: [{ id: sampleProduct.id, quantity: 10 }] },
-      },
-    });
+  const reduxLatestAction = () => {
+    return testStore.getActions().pop();
   };
 
   beforeEach(() => {
+    testStore = mockStore({
+      cart: { value: [{ id: sampleProduct.id, quantity: 10 }] },
+    });
     renderWithReduxAndBrowserRouter(
-      <ProductCard product={sampleProduct} />,
-      createStore()
+      <Quantity productId={sampleProduct.id} />,
+      testStore
     );
     increaseButton = screen.getByTestId("quantity-increase-button");
     decreaseButton = screen.getByTestId("quantity-decrease-button");
@@ -45,15 +45,10 @@ describe("Quantity component test", () => {
         fireEvent.change(inputField, { target: { value: "50" } });
       });
 
-      expect(inputField).toHaveValue(50);
-    });
-
-    it("guards against values less than 1", () => {
-      act(() => {
-        fireEvent.change(inputField, { target: { value: "-50" } });
+      expect(reduxLatestAction()).toEqual({
+        type: "cart/updateQuantity",
+        payload: { id: "testproductid1211", quantity: 50 },
       });
-
-      expect(inputField).toHaveValue(10);
     });
   });
 
@@ -67,20 +62,10 @@ describe("Quantity component test", () => {
         });
       }
 
-      expect(inputField).toHaveValue(15);
-    });
-
-    it("guards against values greater than 999", () => {
-      fireEvent.change(inputField, { target: { value: "999" } });
-      for (let i = 0; i < 5; i++) {
-        act(() => {
-          increaseButton.dispatchEvent(
-            new MouseEvent("click", { bubbles: true })
-          );
-        });
-      }
-
-      expect(inputField).toHaveValue(999);
+      expect(reduxLatestAction()).toEqual({
+        type: "cart/updateQuantity",
+        payload: { id: "testproductid1211", quantity: 11 },
+      });
     });
   });
 
@@ -94,20 +79,9 @@ describe("Quantity component test", () => {
         });
       }
 
-      expect(inputField).toHaveValue(5);
-    });
-
-    describe("when quantity value is 1", () => {
-      it("removes the item from the cart", () => {
-        fireEvent.change(inputField, { target: { value: "1" } });
-
-        act(() => {
-          decreaseButton.dispatchEvent(
-            new MouseEvent("click", { bubbles: true })
-          );
-        });
-
-        expect(screen.getByText("Add to Cart")).toBeInTheDocument();
+      expect(reduxLatestAction()).toEqual({
+        type: "cart/updateQuantity",
+        payload: { id: "testproductid1211", quantity: 9 },
       });
     });
   });

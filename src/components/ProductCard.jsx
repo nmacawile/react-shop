@@ -2,22 +2,15 @@ import Quantity from "./Quantity.jsx";
 import ProductRating from "./ProductRating.jsx";
 import CornerBadge from "./CornerBadge.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addItem,
-  removeItem,
-  updateQuantity,
-} from "../features/cart/cartSlice";
+import { addItem, removeItem } from "../features/cart/cartSlice";
 
 export function ProductCard({ product }) {
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart.value);
 
   const { price, id, name, image, rating } = product;
 
   const itemInCart = cart.find((item) => item.id === id);
-
-  const quantity = itemInCart?.quantity || 0;
 
   const isProductInCart = () => {
     return !!itemInCart;
@@ -29,10 +22,6 @@ export function ProductCard({ product }) {
 
   const removeFromCart = () => {
     dispatch(removeItem(id));
-  };
-
-  const setQuantity = (quantity) => {
-    dispatch(updateQuantity({ id, quantity }));
   };
 
   return (
@@ -67,11 +56,7 @@ export function ProductCard({ product }) {
         {isProductInCart() ? (
           <>
             <div className="flex items-center justify-between">
-              <Quantity
-                quantity={quantity}
-                setQuantity={setQuantity}
-                removeFromCart={removeFromCart}
-              />
+              <Quantity productId={id} />
               <button
                 className="select-none text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={() => removeFromCart()}
