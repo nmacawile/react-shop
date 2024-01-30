@@ -9,11 +9,11 @@ function App() {
 
   return (
     <>
+      <Header setCartIsOpen={setCartIsOpen} />
       <CartDrawer
         setIsOpen={setCartIsOpen}
         isOpen={cartIsOpen}
       ></CartDrawer>
-      <Header setCartIsOpen={setCartIsOpen} />
       <main className="main-content p-4 sm:p-8">
         <Outlet />
       </main>

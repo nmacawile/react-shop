@@ -31,7 +31,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
       onClick={() => setIsOpen(false)}
       data-testid="cart-drawer-backdrop"
       className={
-        "z-40 fixed bg-gray-800/70 w-full h-screen transition-opacity" +
+        "z-40 top-0 fixed bg-gray-800/70 w-full h-screen transition-opacity" +
         (animating ? " opacity-100" : " opacity-0") +
         (visible ? " visible" : " hidden")
       }
