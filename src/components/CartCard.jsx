@@ -33,7 +33,11 @@ export function CartCard({ item }) {
               {product.name}
             </h3>
             <div className="text-sky-600 text-sm mr-3">
-              ${(item.quantity * product.price).toLocaleString("en-us")}
+              $
+              {(item.quantity * product.price).toLocaleString("en-us", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </div>
           </div>
           <div className="p-1">

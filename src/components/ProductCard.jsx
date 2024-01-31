@@ -45,7 +45,11 @@ export function ProductCard({ product }) {
           aria-label="current price"
           className="text-3xl font-bold text-gray-900"
         >
-          ${price.toLocaleString("en-us")}
+          $
+          {price.toLocaleString("en-us", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
         </span>
         <a href="#">
           <h5 className="text-lg font-semibold tracking-tight text-gray-900">
