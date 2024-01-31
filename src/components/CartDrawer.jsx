@@ -6,6 +6,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
   const cartItems = useSelector((state) => state.cart.value.items);
+  const cartItemsCount = cartItems.length;
   const total = useSelector((state) => state.cart.value.total);
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
         </header>
 
         <section className="px-2 py-4 flex-1 overflow-y-auto">
-          {cartItems.length >= 1 ? (
+          {cartItemsCount >= 1 ? (
             <ul className="flex flex-col gap-4 ">
               {cartItems.map((item, index) => (
                 <CartCard key={`cart-${index}`} item={item} />
@@ -107,7 +108,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
         <footer className="p-4 border-t border-gray-300">
           <div id="cart-total" className=" text-center mb-4">
             <span className="font-semibold mr-2 text-md text-gray-700">
-              Total ({cartItems.length} items):
+              Total ({cartItemsCount} item{cartItemsCount !== 1 && "s"}):
             </span>
             <span className="font-bold text-sky-600 text-xl">
               $

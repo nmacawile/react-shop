@@ -8,12 +8,21 @@ import {
 
 describe("CartDrawer component test", () => {
   let setIsOpen;
-  const sampleProduct = {
+  const sampleProduct1 = {
     id: "testproductid1211",
-    name: "Test Product",
+    name: "Test Product 1",
     price: 22129.99,
     description: "A test product.",
     rating: 4.5,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  };
+  const sampleProduct2 = {
+    id: "testproductid22323",
+    name: "Test Product 2",
+    price: 2999.99,
+    description: "Another test product.",
+    rating: 4.4,
     category: "Electronics",
     image: "https://via.placeholder.com/300",
   };
@@ -26,7 +35,10 @@ describe("CartDrawer component test", () => {
       mockStore({
         cart: {
           value: {
-            items: [{ product: sampleProduct, quantity: 10 }],
+            items: [
+              { product: sampleProduct1, quantity: 10 },
+              { product: sampleProduct2, quantity: 10 },
+            ],
             total: 999.9,
           },
         },
@@ -37,6 +49,13 @@ describe("CartDrawer component test", () => {
   it("shows the formatted total value of all cart items", () => {
     const totalEl = screen.getByText("$999.90");
     expect(totalEl).toBeInTheDocument();
+  });
+
+  describe("item count", () => {
+    it("shows the number of items in cart", () => {
+      const itemCountEl = screen.getByText(`Total (2 items):`);
+      expect(itemCountEl).toBeInTheDocument();
+    });
   });
 
   describe("closing trigger test", () => {
