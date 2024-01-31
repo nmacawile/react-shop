@@ -31,10 +31,13 @@ describe("Header component test", () => {
 
   const testStore = mockStore({
     cart: {
-      value: [
-        { product: sampleProduct1, quantity: 1 },
-        { product: sampleProduct2, quantity: 3 },
-      ],
+      value: {
+        items: [
+          { product: sampleProduct1, quantity: 1 },
+          { product: sampleProduct2, quantity: 3 },
+        ],
+        total: 4499.96,
+      },
     },
   });
 

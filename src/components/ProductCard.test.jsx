@@ -52,7 +52,12 @@ describe("ProductCard component test", () => {
     describe("Remove from cart button test", () => {
       it("calls the removeItem reducer when clicked", () => {
         const testStore = mockStore({
-          cart: { value: [{ product: sampleProduct, quantity: 1 }] },
+          cart: {
+            value: {
+              items: [{ product: sampleProduct, quantity: 1 }],
+              total: 22129.99,
+            },
+          },
         });
 
         renderWithReduxAndBrowserRouter(

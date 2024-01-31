@@ -1,34 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+function calculateTotal(items) {
+  return items.reduce(
+    (total, item) => total + item.product.price * item.quantity,
+    0.0
+  );
+}
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    value: [],
+    value: { items: [], total: 0.0 },
   },
   reducers: {
     addItem: (state, action) => {
       const product = { ...action.payload };
       const newItem = { product, quantity: 1 };
-      if (state.value.every((item) => item.product.id !== product.id))
-        state.value = [...state.value, newItem];
+      const items = state.value.items;
+      if (items.every((item) => item.product.id !== product.id)) {
+        const newItems = [...items, newItem];
+        const total = calculateTotal(newItems);
+        state.value = { items: newItems, total };
+      }
     },
     removeItem: (state, action) => {
       const id = action.payload;
-      state.value = state.value.filter((item) => item.product.id !== id);
+      const newItems = state.value.items.filter(
+        (item) => item.product.id !== id
+      );
+      const total = calculateTotal(newItems);
+      state.value = { items: newItems, total };
     },
     updateQuantity: (state, action) => {
-      const cartItems = state.value;
+      const items = state.value.items;
       const { id, quantity } = action.payload;
       if (quantity > 999 || quantity < 1) return;
-      const itemIndex = cartItems.findIndex((item) => item.product.id === id);
+      const itemIndex = items.findIndex((item) => item.product.id === id);
       if (itemIndex === -1) return;
-      const product = { ...cartItems[itemIndex].product };
+      const product = { ...items[itemIndex].product };
       const updatedItem = { product, quantity };
-      state.value = [
-        ...cartItems.slice(0, itemIndex),
+      const newItems = [
+        ...items.slice(0, itemIndex),
         updatedItem,
-        ...cartItems.slice(itemIndex + 1),
+        ...items.slice(itemIndex + 1),
       ];
+      const total = calculateTotal(newItems);
+      state.value = { items: newItems, total };
     },
   },
 });

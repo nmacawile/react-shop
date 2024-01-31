@@ -1,17 +1,42 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { screen, act } from "@testing-library/react";
 import CartDrawer from "./CartDrawer.jsx";
-import { renderWithReduxAndBrowserRouter } from "../helpers/testHelpers.jsx";
+import {
+  renderWithReduxAndBrowserRouter,
+  mockStore,
+} from "../helpers/testHelpers.jsx";
 
 describe("CartDrawer component test", () => {
   let setIsOpen;
+  const sampleProduct = {
+    id: "testproductid1211",
+    name: "Test Product",
+    price: 22129.99,
+    description: "A test product.",
+    rating: 4.5,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+  };
 
   beforeEach(() => {
     setIsOpen = vi.fn();
 
     renderWithReduxAndBrowserRouter(
-      <CartDrawer isOpen={false} setIsOpen={setIsOpen} />
+      <CartDrawer isOpen={false} setIsOpen={setIsOpen} />,
+      mockStore({
+        cart: {
+          value: {
+            items: [{ product: sampleProduct, quantity: 10 }],
+            total: 999.9,
+          },
+        },
+      })
     );
+  });
+
+  it("shows the formatted total value of all cart items", () => {
+    const totalEl = screen.getByText("$999.90");
+    expect(totalEl).toBeInTheDocument();
   });
 
   describe("closing trigger test", () => {

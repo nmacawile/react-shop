@@ -6,7 +6,7 @@ import { addItem, removeItem } from "../features/cart/cartSlice";
 
 export function ProductCard({ product }) {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.value);
+  const cart = useSelector((state) => state.cart.value.items);
 
   const { price, id, name, image, rating } = product;
 

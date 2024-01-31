@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export function Header({ setCartIsOpen }) {
-  const cartItems = useSelector((state) => state.cart.value.length);
+  const cartItems = useSelector((state) => state.cart.value.items.length);
 
   return (
     <header

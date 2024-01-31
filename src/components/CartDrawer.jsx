@@ -5,7 +5,8 @@ import CartCard from "./CartCard.jsx";
 const CartDrawer = ({ isOpen, setIsOpen }) => {
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
-  const cartItems = useSelector((state) => state.cart.value);
+  const cartItems = useSelector((state) => state.cart.value.items);
+  const total = useSelector((state) => state.cart.value.total);
 
   useEffect(() => {
     if (isOpen) {
@@ -108,7 +109,13 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
             <span className="font-semibold mr-2 text-md text-gray-700">
               Total ({cartItems.length} items):
             </span>
-            <span className="font-bold text-sky-600 text-xl">$99,999.99</span>
+            <span className="font-bold text-sky-600 text-xl">
+              $
+              {total.toLocaleString("en-us", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
           </div>
           <div className="grid grid-cols-2 gap-4 select-none">
             <button
