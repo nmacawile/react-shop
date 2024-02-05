@@ -3,19 +3,11 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { screen } from "@testing-library/react";
 import Category from "./Category.jsx";
 import { renderWithRedux } from "../helpers/testHelpers.jsx";
+import { categories } from "../data/categories.js";
 
 describe("Category component test", () => {
   describe("when category is valid", () => {
     it("renders the category title", () => {
-      const categories = [
-        { slug: "apparel-and-fashion", name: "Apparel and Fashion" },
-        { slug: "electronics", name: "Electronics" },
-        { slug: "home-and-furniture", name: "Home and Furniture" },
-        { slug: "health-and-beauty", name: "Health and Beauty" },
-        { slug: "sports-and-outdoors", name: "Sports and Outdoors" },
-        { slug: "toys-and-games", name: "Toys and Games" },
-      ];
-
       categories.forEach((category) => {
         renderWithRedux(
           <MemoryRouter initialEntries={[`/category/${category.slug}`]}>
@@ -25,9 +17,7 @@ describe("Category component test", () => {
           </MemoryRouter>
         );
 
-        expect(
-          screen.getByText(RegExp(category.name, "i"))
-        ).toBeInTheDocument();
+        expect(screen.getByText(RegExp(category.name))).toBeInTheDocument();
       });
     });
   });
