@@ -25,8 +25,17 @@ export function CartCard({ item }) {
 
   return (
     <>
-      <li className="flex flex-cols">
-        <img src={product.image} className=" h-12 me-1" />
+      <li className="flex flex-cols h-full">
+        <div className="w-14 h-full p-1 flex me-1 flex-0">
+          <a href="#" className={`block relative w-full h-full pb-[100%]`}>
+            <img
+              className="object-contain absolute w-full h-full p-0"
+              src={product.image}
+              alt="product image"
+            />
+          </a>
+        </div>
+
         <div className=" w-full overflow-hidden">
           <div className="font-semibold w-full flex overflow-hidden justify-between items-center ">
             <h3 className="ml-1 text-sm text-gray-700 whitespace-nowrap text-ellipsis overflow-hidden">

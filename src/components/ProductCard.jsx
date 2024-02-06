@@ -33,13 +33,19 @@ export function ProductCard({ product }) {
     >
       {isProductInCart() ? <CornerBadge /> : ""}
 
-      <a href="#">
-        <img
-          className="p-8 rounded-t-lg w-full p-0"
-          src={image}
-          alt="product image"
-        />
-      </a>
+      <div className="p-8 w-full flex">
+        <a
+          href="#"
+          className={`block relative w-full h-full pb-[100%] rounded-md`}
+        >
+          <img
+            className="object-contain absolute rounded-t-lg w-full h-full p-0"
+            src={image}
+            alt="product image"
+          />
+        </a>
+      </div>
+
       <div className="px-5 pb-5 text-left">
         <span
           aria-label="current price"
@@ -52,7 +58,7 @@ export function ProductCard({ product }) {
           })}
         </span>
         <a href="#">
-          <h5 className="text-lg font-semibold tracking-tight text-gray-900">
+          <h5 className="line-clamp-2 h-14 text-lg font-semibold tracking-tight text-gray-900">
             {name}
           </h5>
         </a>

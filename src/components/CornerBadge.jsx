@@ -1,10 +1,10 @@
 export function CornerBadge() {
   return (
     <>
-      <div className="corner-badge w-32 h-32 absolute right-0 top-0 border-[4rem] border-transparent border-b-sky-600 translate-x-1/2 -translate-y-1/2 rotate-45" />
+      <div className="z-10 corner-badge w-32 h-32 absolute right-0 top-0 border-[4rem] border-transparent border-b-sky-600 translate-x-1/2 -translate-y-1/2 rotate-45" />
       <div className="absolute top-1 right-1 m-1 text-gray-900 text-sm p-2.5 text-center inline-flex items-center">
         <svg
-          className="w-5 h-5 text-white"
+          className="w-5 h-5 text-white z-20"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"

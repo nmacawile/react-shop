@@ -8,8 +8,9 @@ export function ProductCardPlaceholder() {
       <div className="flex flex-col px-6 pb-4 gap-3 items-start justify-center">
         <div className="h-7 w-[10rem] rounded-md bg-gray-300 animate-pulse"></div>
         <div className="h-5 w-[20rem] max-w-full rounded-md bg-gray-300 animate-pulse"></div>
+        <div className="h-5 w-[15rem] max-w-full rounded-md bg-gray-300 animate-pulse"></div>
         <div className="h-4 w-[7rem] rounded-md bg-gray-300 animate-pulse"></div>
-        <div className="self-end h-10 w-[6rem] mt-2 rounded-md bg-gray-300 animate-pulse"></div>
+        <div className="self-end h-10 w-[6rem] mt-3 rounded-md bg-gray-300 animate-pulse"></div>
       </div>
     </div>
   );
