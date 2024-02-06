@@ -65,7 +65,7 @@ describe("ProductCard component test", () => {
           testStore
         );
 
-        fireEvent.click(screen.getByText("Remove"));
+        fireEvent.click(screen.getByText("Added"));
         const latestAction = testStore.getActions().pop();
 
         expect(latestAction).toEqual({

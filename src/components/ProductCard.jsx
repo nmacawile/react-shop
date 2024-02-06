@@ -68,10 +68,26 @@ export function ProductCard({ product }) {
             <div className="flex items-center justify-between">
               <Quantity productId={id} />
               <button
-                className="select-none text-red-500 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                aria-label="remove from cart"
+                className="select-none text-green-500 hover:text-gray-800 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 items-center inline-flex"
                 onClick={() => removeFromCart()}
               >
-                Remove
+                Added
+                <svg
+                  className="w-3.5 h-3.5 ms-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m5 12 4.7 4.5 9.3-9"
+                  />
+                </svg>
               </button>
             </div>
           </>
