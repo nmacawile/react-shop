@@ -28,7 +28,7 @@ export const categories = [
   },
   {
     name: "Men's Clothing",
-    slug: "mens-clothing",
+    slug: "men's clothing",
     carouselHeading: "Dapper Styles for Men",
     carouselText:
       "Upgrade your wardrobe with the latest trends in men's fashion.",
@@ -37,7 +37,7 @@ export const categories = [
   },
   {
     name: "Women's Clothing",
-    slug: "womens-clothing",
+    slug: "women's clothing",
     carouselHeading: "Chic Fashion for Women",
     carouselText:
       "Indulge in the latest women's clothing to express your unique style.",

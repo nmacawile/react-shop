@@ -2,15 +2,25 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { categories } from "../data/categories";
 import { ProductCard } from "./ProductCard.jsx";
-import { fakeData } from "../data/fakeData.js";
 import ProductCardPlaceholder from "./ProductCardPlaceholder.jsx";
+import productService from "../services/productService";
 
 export function Category() {
   const { category } = useParams();
   const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setLoading(false);
+    // IIFE to run async code
+    (async () => {
+      try {
+        setProducts(await productService.getCategory(category));
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   const title =
@@ -28,7 +38,7 @@ export function Category() {
             ? [1, 2, 3, 4, 5, 6, 7, 8].map((a) => (
                 <ProductCardPlaceholder key={`card-placeholder-${a}`} />
               ))
-            : fakeData.map((product, i) => (
+            : products.map((product, i) => (
                 <ProductCard key={`product-${i}`} product={product} />
               ))}
         </div>
