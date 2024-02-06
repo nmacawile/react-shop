@@ -3,10 +3,12 @@ import ProductRating from "./ProductRating.jsx";
 import CornerBadge from "./CornerBadge.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../features/cart/cartSlice";
+import { useEffect, useState } from "react";
 
 export function ProductCard({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value.items);
+  const [loadingImage, setLoadingImage] = useState(true);
 
   const { price, id, name, image, rating } = product;
 
@@ -24,6 +26,12 @@ export function ProductCard({ product }) {
     dispatch(removeItem(id));
   };
 
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setLoadingImage(false);
+    img.src = image;
+  }, []);
+
   return (
     <div
       className={
@@ -38,11 +46,25 @@ export function ProductCard({ product }) {
           href="#"
           className={`block relative w-full h-full pb-[100%] rounded-md`}
         >
-          <img
-            className="object-contain absolute rounded-t-lg w-full h-full p-0"
-            src={image}
-            alt="product image"
-          />
+          {loadingImage ? (
+            <div className="rounded-md bg-gray-300 h-full w-full absolute animate-pulse flex items-center justify-center">
+              <svg
+                className="w-10 h-10 text-gray-200"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 18"
+              >
+                <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+              </svg>
+            </div>
+          ) : (
+            <img
+              className="object-contain absolute w-full h-full p-0"
+              src={image}
+              alt="product image"
+            />
+          )}
         </a>
       </div>
 
