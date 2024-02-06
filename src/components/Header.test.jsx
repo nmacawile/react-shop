@@ -48,10 +48,6 @@ describe("Header component test", () => {
     );
   });
 
-  it("renders the search form", () => {
-    expect(screen.getByTestId("search-form")).toBeInTheDocument();
-  });
-
   it("renders the header title", () => {
     expect(screen.getByRole("link", { name: /Shop/ })).toHaveAttribute(
       "href",

@@ -17,11 +17,10 @@ export function Header({ setCartIsOpen }) {
           className="flex shrink-0 items-center space-x-2 rtl:space-x-reverse"
         >
           <img src={logo} className="h-8" alt="Shop Logo" />
-          <h1 className="hidden sm:block self-center text-2xl font-['Merriweather Sans'] font-semibold whitespace-nowrap">
+          <h1 className="block self-center text-2xl font-['Merriweather Sans'] font-semibold whitespace-nowrap">
             Shop
           </h1>
         </Link>
-        <SearchForm />
         <button
           type="button"
           data-testid="cart-button"
