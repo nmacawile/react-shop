@@ -9,7 +9,7 @@ export function Header({ setCartIsOpen }) {
   return (
     <header
       data-testid="header-component"
-      className="bg-sky-600 text-white w-full z-20 top-0 start-0"
+      className="bg-sky-600 text-white w-full sticky z-30 top-0 start-0 drop-shadow-md"
     >
       <div className="max-w-screen-xl gap-4 flex flex-nowrap items-center justify-between mx-auto py-4 px-4 sm:px-8">
         <Link
