@@ -33,6 +33,7 @@ export function Checkout() {
 
             <label className="relative inline-flex items-center cursor-pointer">
               <input
+                name="toggle-delete-mode"
                 type="checkbox"
                 value={deleteMode}
                 className="sr-only peer"
@@ -144,7 +145,7 @@ export function Checkout() {
               Back
             </Link>
             <button
-              disabled="true"
+              disabled={true}
               className="select-none cursor-not-allowed w-full md:w-40 flex items-center justify-center px-5 py-2.5 font-medium text-white bg-gray-400 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 focus:outline-none transition-all"
             >
               Check Out
