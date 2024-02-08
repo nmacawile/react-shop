@@ -62,7 +62,7 @@ export function CartCard({ item, setCartIsOpen }) {
                   <button
                     data-testid="cart-item-decrease-button"
                     onClick={() => decrease()}
-                    className="border border-e-0 border-gray-300 hover:bg-gray-200 rounded-l-sm w-16 flex items-center justify-center focus:ring-2 outline-none ring-sky-300"
+                    className="border border-e-0 border-gray-300 hover:bg-gray-200 rounded-l-sm w-16 flex items-center justify-center focus:ring-2 outline-none ring-sky-300 transition-all"
                   >
                     <svg
                       className="w-2 h-2 text-gray-800"
@@ -96,7 +96,7 @@ export function CartCard({ item, setCartIsOpen }) {
                   <button
                     onClick={() => increase()}
                     data-testid="cart-item-increase-button"
-                    className="border border-s-0 border-gray-300 hover:bg-gray-200 rounded-r-sm w-16 flex items-center justify-center focus:ring-2 outline-none ring-sky-300"
+                    className="border border-s-0 border-gray-300 hover:bg-gray-200 rounded-r-sm w-16 flex items-center justify-center focus:ring-2 outline-none ring-sky-300 transition-all"
                   >
                     <svg
                       className="w-2 h-2 text-gray-800"
@@ -121,7 +121,7 @@ export function CartCard({ item, setCartIsOpen }) {
               <button
                 data-testid="cart-item-remove-button"
                 onClick={() => remove()}
-                className="select-none text-xs font-semibold hover:bg-red-200 text-gray-400 hover:text-gray-800 rounded-md px-2 py-1 flex items-center justify-center focus:ring-2 outline-none ring-red-300"
+                className="select-none text-xs font-semibold hover:bg-red-200 text-gray-400 hover:text-gray-800 rounded-md px-2 py-1 flex items-center justify-center focus:ring-2 outline-none ring-red-300 transition-all"
               >
                 Remove
               </button>

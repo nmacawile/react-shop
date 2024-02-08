@@ -70,7 +70,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
             data-testid="cart-close-button"
             onClick={() => setIsOpen(false)}
             aria-controls="cart-drawer"
-            className="text-gray-500 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center"
+            className="text-gray-500 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center transition-all"
           >
             <svg
               className="w-4 h-4"
@@ -125,11 +125,11 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
           <div className="grid grid-cols-2 gap-4 select-none">
             <button
               onClick={() => setIsOpen(false)}
-              className="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-sky-200 hover:border-sky-300 rounded-lg focus:outline-none hover:bg-sky-100 hover:text-sky-900 focus:z-10 focus:ring-4 focus:ring-sky-300"
+              className="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-sky-200 hover:border-sky-300 rounded-lg focus:outline-none hover:bg-sky-100 hover:text-sky-900 focus:z-10 focus:ring-4 focus:ring-sky-300 transition-all"
             >
               Keep Shopping
             </button>
-            <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none">
+            <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none transition-all">
               Check Out
               <svg
                 className="rtl:rotate-180 w-3.5 h-3.5 ms-2"

@@ -30,7 +30,7 @@ export function Quantity({ productId }) {
       <button
         data-testid="quantity-decrease-button"
         onClick={() => decrease()}
-        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-l-md border border-e-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200"
+        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-l-md border border-e-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200 transition-all"
       >
         {/* Minus Icon SVG */}
         <svg
@@ -67,7 +67,7 @@ export function Quantity({ productId }) {
       <button
         data-testid="quantity-increase-button"
         onClick={() => increase()}
-        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-r-md border border-s-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200"
+        className="h-full px-3 py-2.5 hover:bg-gray-200 rounded-r-md border border-s-0 border-gray-300 focus:outline-none focus:ring focus:ring-sky-200 transition-all"
       >
         {/* Plus Icon SVG */}
         <svg

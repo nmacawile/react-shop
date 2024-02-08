@@ -93,7 +93,7 @@ export function ProductCard({ product }) {
               <Quantity productId={id} />
               <button
                 aria-label="remove from cart"
-                className="select-none text-green-500 hover:text-gray-800 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 items-center inline-flex"
+                className="select-none text-green-500 hover:text-gray-800 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 items-center inline-flex transition-all"
                 onClick={() => removeFromCart()}
               >
                 Added
@@ -118,7 +118,7 @@ export function ProductCard({ product }) {
         ) : (
           <div className="flex items-center justify-end">
             <button
-              className="select-none text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="select-none text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all"
               onClick={() => addToCart()}
             >
               Add to Cart
