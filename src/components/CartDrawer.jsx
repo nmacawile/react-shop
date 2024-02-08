@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CartCard from "./CartCard.jsx";
+import { useNavigate } from "react-router-dom";
 
 const CartDrawer = ({ isOpen, setIsOpen }) => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
   const cartItems = useSelector((state) => state.cart.value.items);
@@ -22,6 +24,11 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
       }, 300);
     }
   }, [isOpen]);
+
+  const checkOut = () => {
+    setIsOpen(false);
+    navigate("/checkout");
+  };
 
   const drawerClickHandler = (e) => {
     // Allows clicks inside the drawer without closing it
@@ -129,7 +136,10 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
             >
               Keep Shopping
             </button>
-            <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none transition-all">
+            <button
+              onClick={() => checkOut()}
+              className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-500 focus:ring-4 focus:ring-sky-300 focus:outline-none transition-all"
+            >
               Check Out
               <svg
                 className="rtl:rotate-180 w-3.5 h-3.5 ms-2"

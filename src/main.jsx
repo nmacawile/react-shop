@@ -8,6 +8,7 @@ import Category from "./components/Category.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Product from "./components/Product.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,9 +17,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/category/:category", element: <Category /> },
-      { path: "/product/:productId/", element: <Product />}
+      { path: "/product/:productId/", element: <Product /> },
     ],
   },
+  { path: "/checkout", element: <Checkout /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

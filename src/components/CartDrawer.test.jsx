@@ -51,6 +51,11 @@ describe("CartDrawer component test", () => {
     expect(totalEl).toBeInTheDocument();
   });
 
+  it("renders the checkout button", () => {
+    const checkoutButton = screen.getByRole("button", { name: "Check Out" });
+    expect(checkoutButton).toBeInTheDocument();
+  });
+
   describe("item count", () => {
     it("shows the number of items in cart", () => {
       const itemCountEl = screen.getByText(`Total (2 items):`);
