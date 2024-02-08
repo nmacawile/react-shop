@@ -27,6 +27,19 @@ describe("ProductCard component test", () => {
       expect(screen.getByText("Test Product")).toBeInTheDocument();
     });
 
+    it("has a title that links to the product page", () => {
+      expect(
+        screen.getByRole("link", { name: "Test Product" })
+      ).toHaveAttribute("href", `/product/${sampleProduct.id}`);
+    });
+
+    it("has a link to the product page", () => {
+      expect(screen.getByTestId("product-link")).toHaveAttribute(
+        "href",
+        `/product/${sampleProduct.id}`
+      );
+    });
+
     it("renders the formatted price with a separator and a currency symbol", () => {
       expect(screen.getByText("$22,129.99")).toBeInTheDocument();
     });

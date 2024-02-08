@@ -95,7 +95,11 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
           {cartItemsCount >= 1 ? (
             <ul className="flex flex-col gap-4 ">
               {cartItems.map((item, index) => (
-                <CartCard key={`cart-${index}`} item={item} />
+                <CartCard
+                  key={`cart-${index}`}
+                  item={item}
+                  setCartIsOpen={setIsOpen}
+                />
               ))}
             </ul>
           ) : (

@@ -4,6 +4,7 @@ import CornerBadge from "./CornerBadge.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../features/cart/cartSlice";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -42,8 +43,9 @@ export function ProductCard({ product }) {
       {isProductInCart() ? <CornerBadge /> : ""}
 
       <div className="p-8 w-full flex">
-        <a
-          href="#"
+        <Link
+          data-testid="product-link"
+          to={`/product/${id}`}
           className={`block relative w-full h-full pb-[100%] rounded-md`}
         >
           {loadingImage ? (
@@ -65,7 +67,7 @@ export function ProductCard({ product }) {
               alt="product image"
             />
           )}
-        </a>
+        </Link>
       </div>
 
       <div className="px-5 pb-5 text-left">
@@ -79,11 +81,11 @@ export function ProductCard({ product }) {
             maximumFractionDigits: 2,
           })}
         </span>
-        <a href="#">
+        <Link to={`/product/${id}`}>
           <h5 className="line-clamp-2 h-14 text-lg font-semibold tracking-tight text-gray-900">
             {name}
           </h5>
-        </a>
+        </Link>
         <ProductRating rating={rating} />
         {isProductInCart() ? (
           <>

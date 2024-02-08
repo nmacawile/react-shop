@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom";
 
-export function CartCard({ item }) {
+export function CartCard({ item, setCartIsOpen }) {
   const { quantity, product } = item;
 
   const dispatch = useDispatch();
@@ -27,13 +28,18 @@ export function CartCard({ item }) {
     <>
       <li className="flex flex-cols h-full">
         <div className="w-14 h-full p-1 flex me-1 flex-0">
-          <a href="#" className={`block relative w-full h-full pb-[100%]`}>
+          <Link
+            to={`/product/${product.id}`}
+            onClick={() => setCartIsOpen(false)}
+            data-testid={`cart-product-link-${product.id}`}
+            className={`block relative w-full h-full pb-[100%]`}
+          >
             <img
               className="object-contain absolute w-full h-full p-0"
               src={product.image}
               alt="product image"
             />
-          </a>
+          </Link>
         </div>
 
         <div className=" w-full overflow-hidden">

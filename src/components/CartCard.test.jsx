@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { vi, describe, it, expect, beforeEach } from "vitest";
 import { screen, act, fireEvent } from "@testing-library/react";
 import CartCard from "./CartCard.jsx";
 import {
@@ -21,17 +21,37 @@ describe("CartCard component", () => {
     return store.getActions().pop();
   };
 
+  const setCartIsOpen = vi.fn();
+
   beforeEach(() => {
     // store state value is empty; the product isn't in the store
     // but it will not be checked as it is only mocked
     renderWithReduxAndBrowserRouter(
-      <CartCard item={{ product: sampleProduct, quantity: 3 }} />
+      <CartCard
+        item={{ product: sampleProduct, quantity: 3 }}
+        setCartIsOpen={setCartIsOpen}
+      />
     );
   });
 
   it("should display the product name", () => {
     const productName = screen.getByText(sampleProduct.name);
     expect(productName).toBeInTheDocument();
+  });
+
+  it("has a link to the product page", () => {
+    expect(screen.getByTestId("cart-product-link-1")).toHaveAttribute(
+      "href",
+      `/product/${sampleProduct.id}`
+    );
+  });
+
+  it("closes the drawer when link to product is clicked", () => {
+    const productLink = screen.getByTestId(`cart-product-link-1`);
+    act(() => {
+      productLink.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    expect(setCartIsOpen).toHaveBeenCalledWith(false);
   });
 
   it("should display the formatted sub-total", () => {
