@@ -22,7 +22,7 @@ export const productService = {
   getProduct: (id) =>
     axiosInstance
       .get(`/products/${id}`)
-      .then(({ data }) => convertProduct(data)),
+      .then(({ data }) => data && convertProduct(data)),
 };
 
 export default productService;

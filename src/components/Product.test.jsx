@@ -110,4 +110,27 @@ describe("Product component", () => {
       });
     });
   });
+
+  describe("Product does not exist", () => {
+    beforeEach(() => {
+      productService.getProduct.mockResolvedValue();
+      renderWithRedux(
+        <MemoryRouter initialEntries={[`/product/${sampleProduct.id}`]}>
+          <Routes>
+            <Route path="/product/:productId" element={<Product />} />
+          </Routes>
+        </MemoryRouter>
+      );
+    });
+
+    it("renders the error message", async () => {
+      await waitFor(() =>
+        expect(
+          screen.getByText(
+            "Unfortunately, the requested product does not exist."
+          )
+        ).toBeInTheDocument()
+      );
+    });
+  });
 });
