@@ -7,8 +7,8 @@ const axiosInstance = axios.create({
 const convertProduct = (product) => {
   const { title, rating, ...otherProps } = product;
   return {
-    name: product.title,
-    rating: product.rating.rate,
+    name: title,
+    rating: rating.rate,
     ...otherProps,
   };
 };
