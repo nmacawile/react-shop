@@ -14,7 +14,7 @@ describe("Product component", () => {
     price: 22129.99,
     description: "A test product.",
     rating: 4.5,
-    category: "Electronics",
+    category: "electronics",
     image: "https://via.placeholder.com/300",
   };
 

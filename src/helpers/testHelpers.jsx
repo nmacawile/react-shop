@@ -4,7 +4,10 @@ import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
 export const mockStore = configureStore([]);
-export const store = mockStore({ cart: { value: { items: [], total: 0.0 } } });
+export const store = mockStore({
+  cart: { value: { items: [], total: 0.0 } },
+  breadcrumbs: { value: [] },
+});
 
 export function withRedux(children, _store = store) {
   return <Provider store={_store}>{children}</Provider>;

@@ -6,6 +6,11 @@ import Quantity from "./Quantity";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem, addItem } from "../features/cart/cartSlice";
 import ProductPlaceholder from "./ProductPlaceholder";
+import { categories } from "../data/categories";
+import {
+  setBreadcrumbs,
+  clearBreadcrumbs,
+} from "../features/breadcrumbs/breadcrumbsSlice";
 
 export function Product() {
   const { productId } = useParams();
@@ -45,6 +50,19 @@ export function Product() {
       const img = new Image();
       img.onload = () => setLoadingImage(false);
       img.src = product.image;
+
+      const categoryData = categories.find((c) => c.slug === product.category);
+      const categoryTitle = categoryData.name;
+
+      dispatch(
+        setBreadcrumbs([
+          { title: "Home", link: "/" },
+          { title: categoryTitle, link: `/category/${product.category}` },
+          { title: product.name },
+        ])
+      );
+    } else {
+      dispatch(setBreadcrumbs([{ title: "Home", link: "/" }]));
     }
   }, [product]);
 

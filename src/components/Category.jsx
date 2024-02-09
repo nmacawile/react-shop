@@ -4,11 +4,14 @@ import { categories } from "../data/categories";
 import { ProductCard } from "./ProductCard.jsx";
 import ProductCardPlaceholder from "./ProductCardPlaceholder.jsx";
 import productService from "../services/productService";
+import { useSelector, useDispatch } from "react-redux";
+import { setBreadcrumbs } from "../features/breadcrumbs/breadcrumbsSlice.js";
 
 export function Category() {
   const { category } = useParams();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // IIFE to run async code
@@ -21,11 +24,21 @@ export function Category() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [category]);
 
   const title =
     categories.find((c) => c.slug === category)?.name ||
     "Category not available";
+
+  useEffect(() => {
+    dispatch(
+      setBreadcrumbs([
+        { title: "Home", link: "/" },
+        { title },
+      ])
+    );
+  }, [title]);
+
   return (
     <>
       <section className="category">
