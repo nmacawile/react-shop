@@ -12,7 +12,7 @@ export function Categories() {
       {categories.map(({ name, icon, slug }, index) => (
         <article
           key={`category-${index}`}
-          className="relative group overflow-hidden"
+          className="relative group overflow-hidden shadow-md"
         >
           <Link
             to={`category/${slug}`}
