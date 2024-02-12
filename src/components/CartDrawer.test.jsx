@@ -31,7 +31,7 @@ describe("CartDrawer component test", () => {
     setIsOpen = vi.fn();
 
     renderWithReduxAndBrowserRouter(
-      <CartDrawer isOpen={false} setIsOpen={setIsOpen} />,
+      <CartDrawer isOpen={true} setIsOpen={setIsOpen} />,
       mockStore({
         cart: {
           value: {
@@ -65,7 +65,7 @@ describe("CartDrawer component test", () => {
 
   describe("closing trigger test", () => {
     it("closes when backdrop is clicked", () => {
-      const backdrop = screen.getByTestId("cart-drawer-backdrop");
+      const backdrop = document.getElementById("cart-drawer-backdrop");
       act(() => {
         backdrop.dispatchEvent(new MouseEvent("click", { bubbles: true }));
       });
