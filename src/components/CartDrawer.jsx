@@ -7,19 +7,21 @@ import "./CartDrawer.css";
 const CartDrawer = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
   const [visible, setVisibility] = useState(false);
-  const [drawerVisibility, setDrawerVisibility] = useState(false);
   const cartItems = useSelector((state) => state.cart.value.items);
   const cartItemsCount = cartItems.length;
   const total = useSelector((state) => state.cart.value.total);
 
   useEffect(() => {
-    if (isOpen) {                       // open drawer
-      setVisibility(true);              // show backdrop
-      setDrawerVisibility(true);        // show drawer
-    } else {                            // close drawer
-      setDrawerVisibility(false);       // hides drawer and backdrop with animation
-      setTimeout(() => {                // remove the component after finishing animation
-        setVisibility(false);           
+    
+    // open drawer, set entrance animations
+    if (isOpen) {
+      // make the component visible, automatically initiate entrance animations
+      setVisibility(true); 
+    } else {
+      // close drawer, set and initiate exit animations
+      setTimeout(() => {
+        // hides the component after finishing exit animations
+        setVisibility(false);
       }, 400);
     }
   }, [isOpen]);
@@ -36,21 +38,22 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
 
   return (
     visible && (
-      <div
-        onClick={() => setIsOpen(false)}
-        id="cart-drawer-backdrop"
-        className={
-          "z-40 top-0 fixed bg-gray-800/70 w-full h-screen " +
-          (isOpen ? " fade-in" : " fade-out")
-        }
-      >
+      <>
+        <div
+          onClick={() => setIsOpen(false)}
+          id="cart-drawer-backdrop"
+          className={
+            "z-40 top-0 fixed bg-gray-800/70 w-full h-screen " +
+            (isOpen ? " fade-in" : " fade-out")
+          }
+        />
         <aside
           onClick={drawerClickHandler}
           id="cart-drawer"
           data-testid="cart-drawer"
           className={
             "fixed top-0 right-0 z-40 h-screen flex flex-col overflow-hidden bg-white w-full sm:w-96" +
-            (drawerVisibility ? " slide-in" : " slide-out")
+            (isOpen ? " slide-in" : " slide-out")
           }
           tabIndex="-1"
           aria-labelledby="cart-drawer-label"
@@ -159,7 +162,7 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
             </div>
           </footer>
         </aside>
-      </div>
+      </>
     )
   );
 };
