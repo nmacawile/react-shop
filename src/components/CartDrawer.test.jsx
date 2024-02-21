@@ -51,9 +51,8 @@ describe("CartDrawer component test", () => {
     expect(totalEl).toBeInTheDocument();
   });
 
-  it("renders the checkout button", () => {
-    const checkoutButton = screen.getByRole("button", { name: "Check Out" });
-    expect(checkoutButton).toBeInTheDocument();
+  it("has a link to the checkout page", () => {
+    expect(screen.getByText("Check Out")).toHaveAttribute("href", "/checkout");
   });
 
   describe("item count", () => {
