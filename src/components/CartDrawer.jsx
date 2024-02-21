@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CartCard from "./CartCard.jsx";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./CartDrawer.css";
 
 const CartDrawer = ({ isOpen, setIsOpen }) => {
-  const navigate = useNavigate();
   const [visible, setVisibility] = useState(false);
   const cartItems = useSelector((state) => state.cart.value.items);
   const cartItemsCount = cartItems.length;
