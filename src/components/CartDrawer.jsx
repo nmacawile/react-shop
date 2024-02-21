@@ -25,11 +25,6 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
     }
   }, [isOpen]);
 
-  const drawerClickHandler = (e) => {
-    // Allows clicks inside the drawer without closing it
-    e.stopPropagation();
-  };
-
   return (
     visible && (
       <>
@@ -42,7 +37,6 @@ const CartDrawer = ({ isOpen, setIsOpen }) => {
           }
         />
         <aside
-          onClick={drawerClickHandler}
           id="cart-drawer"
           data-testid="cart-drawer"
           className={
