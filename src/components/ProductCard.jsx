@@ -31,6 +31,10 @@ export function ProductCard({ product }) {
     const img = new Image();
     img.onload = () => setLoadingImage(false);
     img.src = image;
+
+    return () => {
+      img.onload = null;
+    };
   }, []);
 
   return (

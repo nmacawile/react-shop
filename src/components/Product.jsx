@@ -46,8 +46,8 @@ export function Product() {
 
   useEffect(() => {
     setLoadingImage(true);
+    let img = new Image();
     if (product) {
-      const img = new Image();
       img.onload = () => setLoadingImage(false);
       img.src = product.image;
 
@@ -64,6 +64,10 @@ export function Product() {
     } else {
       dispatch(setBreadcrumbs([{ title: "Home", link: "/" }]));
     }
+
+    return () => {
+      img.onload = null;
+    };
   }, [product]);
 
   const template = () => (
